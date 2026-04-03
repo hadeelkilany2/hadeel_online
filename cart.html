@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#1a2f4a">
+    <script>try{var t=localStorage.getItem('hadeel-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+    <meta name="description" content="سلة التسوق - Hadeel SkinCare">
+    <title>سلة التسوق - Hadeel SkinCare</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@500;600;700&family=Tajawal:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="page-cart">
+    <a href="https://instagram.com/hadeel.k_beauty" class="instagram-side-float" target="_blank" rel="noopener noreferrer" aria-label="إنستغرام Hadeel SkinCare — @hadeel.k_beauty">
+        <i class="fab fa-instagram" aria-hidden="true"></i>
+    </a>
+    <header class="header" id="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-spa"></i>
+                    <div class="logo-text">
+                        <h1>Hadeel SkinCare</h1>
+                        <p>العناية الطبيعية ببشرتك</p>
+                    </div>
+                </a>
+                <div class="nav-links" id="navLinks">
+                    <a href="index.html" class="nav-link">الرئيسية</a>
+                    <a href="products.html" class="nav-link">المنتجات</a>
+                    <a href="about.html" class="nav-link">من نحن</a>
+                    <a href="cart.html" class="cart-btn active">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>السلة</span>
+                        <span class="cart-count">0</span>
+                    </a>
+                </div>
+                <div class="navbar-end">
+                    <button type="button" class="theme-toggle" id="themeToggle" aria-label="تفعيل الوضع الداكن">
+                        <i class="fas fa-moon theme-toggle__icon theme-toggle__icon--moon" aria-hidden="true"></i>
+                        <i class="fas fa-sun theme-toggle__icon theme-toggle__icon--sun" aria-hidden="true"></i>
+                    </button>
+                    <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" aria-label="فتح القائمة">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="cart-page-main">
+        <div class="cart-page-strip">
+            <div class="container cart-page-strip-inner">
+                <nav class="cart-breadcrumb" aria-label="مسار التنقل">
+                    <a href="index.html"><i class="fas fa-home" aria-hidden="true"></i> الرئيسية</a>
+                    <span class="cart-breadcrumb-sep" aria-hidden="true">/</span>
+                    <a href="products.html">المنتجات</a>
+                    <span class="cart-breadcrumb-sep" aria-hidden="true">/</span>
+                    <span class="cart-breadcrumb-current">سلة التسوق</span>
+                </nav>
+            </div>
+        </div>
+
+        <div class="cart-container container">
+            <header class="cart-head-card">
+                <div class="cart-head-icon" aria-hidden="true">
+                    <i class="fas fa-shopping-bag"></i>
+                </div>
+                <div class="cart-head-text">
+                    <p class="cart-head-eyebrow">إتمام الطلب</p>
+                    <h1 class="cart-head-title">سلة التسوق</h1>
+                    <p class="cart-head-desc">راجعي المنتجات، عبّي بيانات التوصيل، واختاري طريقة الدفع بأمان.</p>
+                </div>
+            </header>
+
+            <div class="cart-content">
+                <!-- المحتوى سيتم إنشاؤه بالجافاسكريبت -->
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section footer-brand">
+                    <h3>Hadeel SkinCare</h3>
+                    <p class="footer-brand-text">متجر متخصص في منتجات العناية بالبشرة الطبيعية المصنوعة يدوياً بعناية وحب.</p>
+                    <div class="footer-social">
+                        <a href="https://instagram.com/hadeel.k_beauty" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="إنستغرام"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>روابط سريعة</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html"><i class="fas fa-home"></i> الرئيسية</a></li>
+                        <li><a href="products.html"><i class="fas fa-shopping-bag"></i> المنتجات</a></li>
+                        <li><a href="about.html"><i class="fas fa-info-circle"></i> من نحن</a></li>
+                        <li><a href="cart.html"><i class="fas fa-shopping-cart"></i> سلة التسوق</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>اتصل بنا</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://instagram.com/hadeel.k_beauty" target="_blank" rel="noopener noreferrer" class="footer-contact-link"><i class="fab fa-instagram"></i> @hadeel.k_beauty</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="footer-copyright">© <span id="currentYear">2024</span> Hadeel SkinCare. جميع الحقوق محفوظة.</p>
+                <p class="footer-credit-line">تم التصميم بواسطة <a href="https://instagram.com/ayacode.1" target="_blank" rel="noopener noreferrer">AyaCode studio</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="theme.js"></script>
+    <script src="telegram-config.js"></script>
+    <script src="whatsapp-order.js"></script>
+    <script src="telegram-notify.js"></script>
+    <script src="chatbot.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // تحديث السنة
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const navLinks = document.getElementById('navLinks');
+            if (mobileMenuBtn && navLinks) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    navLinks.classList.toggle('active');
+                    this.innerHTML = navLinks.classList.contains('active')
+                        ? '<i class="fas fa-times"></i>'
+                        : '<i class="fas fa-bars"></i>';
+                });
+                document.querySelectorAll('.nav-link').forEach(function(link) {
+                    link.addEventListener('click', function() {
+                        navLinks.classList.remove('active');
+                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                    });
+                });
+                document.querySelectorAll('.cart-btn').forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        navLinks.classList.remove('active');
+                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                    });
+                });
+            }
+            const headerEl = document.getElementById('header');
+            window.addEventListener('scroll', function() {
+                if (!headerEl) return;
+                if (window.pageYOffset > 50) headerEl.classList.add('scrolled');
+                else headerEl.classList.remove('scrolled');
+            });
+            
+            // متغيرات الشحن - تمت إضافة باقة أو جت بسعر 40 شيكل
+            let selectedRegion = null;
+            const shippingPrices = {
+                'south': 50,
+                'north': 40,
+                'other': 30,
+                'baka': 40  // تمت إضافة باقة أو جت بسعر توصيل 40 شيكل
+            };
+            
+            // متغيرات الدفع
+            let selectedPaymentMethod = 'cash';
+            
+            // عرض محتويات السلة
+            function displayCart() {
+                const cartContent = document.querySelector('.cart-content');
+                const cart = JSON.parse(localStorage.getItem('hadeelCart') || '[]');
+                
+                if (cart.length === 0) {
+                    cartContent.innerHTML = `
+                        <div class="empty-cart">
+                            <div class="empty-cart-icon-wrap"><i class="fas fa-shopping-cart" aria-hidden="true"></i></div>
+                            <h2>سلة التسوق فارغة</h2>
+                            <p>لم تقم بإضافة أي منتجات بعد. تصفّحي المنتجات وأضيفي ما يعجبك.</p>
+                            <a href="products.html" class="continue-shopping">
+                                <i class="fas fa-shopping-bag" aria-hidden="true"></i>
+                                تصفّحي المنتجات
+                            </a>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                // حساب إجمالي المنتجات
+                let subtotal = 0;
+                let cartItemsHTML = '';
+                
+                cart.forEach((item, index) => {
+                    const itemTotal = item.price * item.quantity;
+                    subtotal += itemTotal;
+                    const thumb = item.image
+                        ? '<img src="' + item.image + '" alt="">'
+                        : '<i class="fas fa-spa"></i>';
+                    
+                    cartItemsHTML += `
+                        <tr class="cart-table-row">
+                            <td data-label="المنتج">
+                                <div class="product-cell">
+                                    <div class="product-image">
+                                        ${thumb}
+                                    </div>
+                                    <div class="product-info">
+                                        <h3>${item.name}</h3>
+                                        <p>منتج طبيعي 100%</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td data-label="السعر" class="cart-cell-price">${item.price} <span class="cart-shekel">₪</span></td>
+                            <td data-label="الكمية">
+                                <div class="quantity-controls">
+                                    <button type="button" class="quantity-btn" onclick="updateQuantity(${index}, -1)" aria-label="تقليل الكمية">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <input type="number" class="quantity-input" value="${item.quantity}" min="1" 
+                                           onchange="updateQuantity(${index}, 0, this.value)" aria-label="الكمية">
+                                    <button type="button" class="quantity-btn" onclick="updateQuantity(${index}, 1)" aria-label="زيادة الكمية">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
+                            </td>
+                            <td data-label="المجموع" class="cart-cell-price cart-cell-total">${itemTotal} <span class="cart-shekel">₪</span></td>
+                            <td data-label="">
+                                <button type="button" class="remove-btn" onclick="removeItem(${index})" title="إزالة المنتج">
+                                    <i class="fas fa-trash" aria-hidden="true"></i>
+                                    <span class="remove-btn-label">إزالة</span>
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                });
+                
+                // حساب الشحن
+                const shippingCost = selectedRegion ? shippingPrices[selectedRegion] : 0;
+                const total = subtotal + shippingCost;
+                
+                cartContent.innerHTML = `
+                    <div class="cart-main-stack">
+                        <div class="cart-items">
+                            <div class="cart-table-scroll">
+                            <table class="cart-table">
+                                <thead>
+                                    <tr>
+                                        <th>المنتج</th>
+                                        <th>السعر</th>
+                                        <th>الكمية</th>
+                                        <th>المجموع</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${cartItemsHTML}
+                                </tbody>
+                            </table>
+                            </div>
+                        </div>
+                        
+                        <div class="customer-info-section">
+                            <h3 class="cart-form-title">
+                                <i class="fas fa-user-circle"></i>
+                                معلومات العميل
+                            </h3>
+                            
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="customerName">
+                                        <span class="required-label">*</span>الاسم الكامل
+                                    </label>
+                                    <input type="text" id="customerName" class="input-field required" 
+                                           placeholder="أدخل اسمك الكامل" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="customerPhone">
+                                        <span class="required-label">*</span>رقم الهاتف
+                                    </label>
+                                    <input type="tel" id="customerPhone" class="input-field required" 
+                                           placeholder="مثال: 0591234567" required>
+                                </div>
+                                
+                                <div class="form-group full-width">
+                                    <label for="customerAddress">
+                                        <span class="required-label">*</span>العنوان بالتفصيل
+                                    </label>
+                                    <textarea id="customerAddress" class="input-field required" 
+                                              rows="3" placeholder="الشارع، المدينة، المنطقة..." required></textarea>
+                                </div>
+                                
+                                <div class="form-group full-width">
+                                    <label>
+                                        <span class="required-label">*</span>اختر المنطقة
+                                    </label>
+                                    <div class="region-select">
+                                        <div class="region-option ${selectedRegion === 'south' ? 'selected' : ''}" 
+                                             onclick="selectRegion('south')">
+                                            <i class="fas fa-map-marker-alt"></i>
+                                            <div>جنوب</div>
+                                            <span class="region-price">${shippingPrices.south} ₪</span>
+                                        </div>
+                                        <div class="region-option ${selectedRegion === 'north' ? 'selected' : ''}" 
+                                             onclick="selectRegion('north')">
+                                            <i class="fas fa-map-marker-alt"></i>
+                                            <div>شمال</div>
+                                            <span class="region-price">${shippingPrices.north} ₪</span>
+                                        </div>
+                                        <div class="region-option ${selectedRegion === 'other' ? 'selected' : ''}" 
+                                             onclick="selectRegion('other')">
+                                            <i class="fas fa-map-marker-alt"></i>
+                                            <div>وادي عاره</div>
+                                            <span class="region-price">${shippingPrices.other} ₪</span>
+                                        </div>
+                                        <div class="region-option ${selectedRegion === 'baka' ? 'selected' : ''}" 
+                                             onclick="selectRegion('baka')">
+                                            <i class="fas fa-map-marker-alt"></i>
+                                            <div>باقة أو جت</div>
+                                            <span class="region-price">${shippingPrices.baka} ₪</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group full-width">
+                                    <label for="customerNotes">ملاحظات إضافية (اختياري)</label>
+                                    <textarea id="customerNotes" class="input-field" 
+                                              rows="2" placeholder="ملاحظات خاصة بالطلب..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="payment-section">
+                            <h3 class="cart-form-title">
+                                <i class="fas fa-credit-card"></i>
+                                طريقة الدفع
+                            </h3>
+                            
+                            <div class="payment-options">
+                                <div class="payment-option ${selectedPaymentMethod === 'cash' ? 'selected' : ''}" 
+                                     onclick="selectPaymentMethod('cash')">
+                                    <div class="payment-option-header">
+                                        <i class="fas fa-money-bill-wave"></i>
+                                        <div class="payment-option-title">دفع نقدي</div>
+                                    </div>
+                                    <div class="payment-option-desc">
+                                        تدفعين المبلغ نقداً عند استلام الطلب. نستلم تفاصيل الطلب على بريدنا تلقائياً.
+                                    </div>
+                                </div>
+                                
+                                <div class="payment-option ${selectedPaymentMethod === 'bit' ? 'selected' : ''}" 
+                                     onclick="selectPaymentMethod('bit')">
+                                    <div class="payment-option-header">
+                                        <i class="fas fa-qrcode"></i>
+                                        <div class="payment-option-title">دفع عبر بت</div>
+                                    </div>
+                                    <div class="payment-option-desc">
+                                        ادفعي الآن عبر تطبيق بت بمسح رمز QR أدناه
+                                    </div>
+                                    
+                                    <div class="bit-info">
+                                        <h4><i class="fas fa-info-circle"></i> حول الدفع عبر بت</h4>
+                                        <ul>
+                                            <li><i class="fas fa-check"></i> دفع آمن 100%</li>
+                                            <li><i class="fas fa-check"></i> تحويل فوري</li>
+                                            <li><i class="fas fa-check"></i> إشعار فوري بالدفع</li>
+                                            <li><i class="fas fa-check"></i> لا حاجة لمشاركة معلومات البطاقة</li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="payment-instructions">
+                                        <strong>كيفية الدفع عبر بت:</strong>
+                                        <ol class="payment-steps-list">
+                                            <li>افتح تطبيق بت على هاتفك</li>
+                                            <li>اضغط على "الماسح الضوئي" أو "Scan"</li>
+                                            <li>امسح رمز QR الموجود أدناه</li>
+                                            <li>أدخل المبلغ المطلوب وأكمل الدفع</li>
+                                            <li>ستصلك رسالة تأكيد فوراً</li>
+                                        </ol>
+                                    </div>
+                                    
+                                    <div class="qr-container ${selectedPaymentMethod === 'bit' ? 'show' : ''}" id="bitQrContainer">
+                                        <div class="qr-code">
+                                            <!-- === صورة QR Code للدفع عبر بت === -->
+                                            <img src="images/bit-qr-code.jpeg" 
+                                                 alt="رمز QR للدفع عبر بت"
+                                                 onerror="this.onerror=null; this.src='images/bit-qr-code.jpeg'; this.alt='رمز QR للدفع عبر بت'">
+                                        </div>
+                                        <div class="qr-footer">
+                                            <p class="qr-amount-line">المبلغ: <span class="qr-amount-value">${total} ₪</span></p>
+                                            <p class="qr-hint-line">امسح الرمز وادفع عبر تطبيق بت</p>
+                                            <div class="qr-safe-badge"><i class="fas fa-shield-alt" aria-hidden="true"></i> آمن 100%</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="cart-summary">
+                        <h3 class="cart-form-title">
+                            <i class="fas fa-receipt"></i>
+                            ملخص الطلب
+                        </h3>
+                        
+                        <div class="summary-row">
+                            <span>المجموع الفرعي</span>
+                            <span>${subtotal} ₪</span>
+                        </div>
+                        
+                        <div class="summary-row">
+                            <span>تكاليف الشحن</span>
+                            <span id="shippingCost">${shippingCost} ₪</span>
+                        </div>
+                        
+                        ${selectedRegion ? `
+                            <div class="shipping-note">
+                                <i class="fas fa-info-circle shipping-note-icon" aria-hidden="true"></i>
+                                <div class="shipping-note-body">
+                                    <strong>الشحن لـ: ${getRegionName(selectedRegion)}</strong>
+                                    <div class="shipping-note-detail">سيتم توصيل الطلب خلال 2-3 أيام عمل</div>
+                                </div>
+                            </div>
+                        ` : ''}
+                        
+                        <div class="summary-row total">
+                            <span>الإجمالي النهائي</span>
+                            <span id="totalPrice">${total} ₪</span>
+                        </div>
+                        
+                        ${selectedPaymentMethod === 'cash' ? `
+                            <button type="button" class="checkout-btn" onclick="checkoutViaCash()" id="checkoutBtn" ${selectedRegion ? '' : 'disabled'}>
+                                <i class="fas fa-check-circle"></i>
+                                تأكيد الطلب — نقدي
+                            </button>
+                        ` : `
+                            <button type="button" class="checkout-btn checkout-btn--bit" onclick="checkoutViaBit()" id="checkoutBtn">
+                                <i class="fas fa-qrcode" aria-hidden="true"></i>
+                                تأكيد الطلب — بت
+                            </button>
+                        `}
+                        
+                        <div class="cart-summary-trust">
+                            <p><i class="fas fa-info-circle" aria-hidden="true"></i> ${selectedPaymentMethod === 'cash' ? 'يُرسل الطلب إلى بريدنا مباشرة؛ الدفع عند التوصيل نقداً' : 'امسحي رمز بت وأكملي الدفع ثم أكدي الطلب'}</p>
+                            <p class="cart-summary-trust-sub"><i class="fas fa-shield-alt" aria-hidden="true"></i> معلوماتك محمية ولا نشاركها مع أحد</p>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // اختيار المنطقة
+            window.selectRegion = function(region) {
+                selectedRegion = region;
+                displayCart();
+                updateCheckoutButton();
+                showNotification(`تم اختيار ${getRegionName(region)}`, 'success');
+            }
+            
+            // اختيار طريقة الدفع
+            window.selectPaymentMethod = function(method) {
+                selectedPaymentMethod = method;
+                displayCart();
+                updateCheckoutButton();
+                showNotification(method === 'cash' ? 'تم اختيار الدفع نقدي' : 'تم اختيار الدفع عبر بت', 'success');
+            }
+            
+            // الحصول على اسم المنطقة - تمت إضافة باقة أو جت
+            function getRegionName(region) {
+                const names = {
+                    'south': 'جنوب',
+                    'north': 'شمال',
+                    'other': 'وادي عاره',
+                    'baka': 'باقة أو جت'  // تمت إضافة اسم المنطقة الجديدة
+                };
+                return names[region] || region;
+            }
+            
+            // تحديث زر الإتمام
+            function updateCheckoutButton() {
+                const btn = document.getElementById('checkoutBtn');
+                if (btn) {
+                    const isValid = validateForm();
+                    btn.disabled = !isValid;
+                }
+            }
+            
+            // التحقق من صحة النموذج
+            function validateForm() {
+                if (!selectedRegion) return false;
+                
+                const name = document.getElementById('customerName')?.value.trim();
+                const phone = document.getElementById('customerPhone')?.value.trim();
+                const address = document.getElementById('customerAddress')?.value.trim();
+                
+                return name && phone && address;
+            }
+            
+            // تحديث الكمية
+            window.updateQuantity = function(index, change, value = null) {
+                const cart = JSON.parse(localStorage.getItem('hadeelCart') || '[]');
+                
+                if (value !== null) {
+                    const newValue = parseInt(value);
+                    if (!isNaN(newValue) && newValue > 0) {
+                        cart[index].quantity = newValue;
+                    }
+                } else {
+                    cart[index].quantity += change;
+                    if (cart[index].quantity < 1) cart[index].quantity = 1;
+                }
+                
+                localStorage.setItem('hadeelCart', JSON.stringify(cart));
+                displayCart();
+                updateCartCount();
+                showNotification('تم تحديث الكمية', 'success');
+            }
+            
+            // إزالة منتج
+            window.removeItem = function(index) {
+                const cart = JSON.parse(localStorage.getItem('hadeelCart') || '[]');
+                const removedItem = cart[index];
+                cart.splice(index, 1);
+                localStorage.setItem('hadeelCart', JSON.stringify(cart));
+                displayCart();
+                updateCartCount();
+                showNotification(`تمت إزالة ${removedItem.name} من السلة`, 'warning');
+            }
+            
+            window.checkoutViaCash = function() {
+                const cart = JSON.parse(localStorage.getItem('hadeelCart') || '[]');
+                if (cart.length === 0) {
+                    showNotification('السلة فارغة. أضفي بعض المنتجات أولاً', 'error');
+                    return;
+                }
+                
+                const customerName = document.getElementById('customerName').value.trim();
+                const customerPhone = document.getElementById('customerPhone').value.trim();
+                const customerAddress = document.getElementById('customerAddress').value.trim();
+                const customerNotes = document.getElementById('customerNotes').value.trim();
+                
+                if (!customerName || !customerPhone || !customerAddress || !selectedRegion) {
+                    showNotification('الرجاء تعبئة جميع البيانات المطلوبة', 'error');
+                    return;
+                }
+                
+                let message = 'طلب جديد من Hadeel SkinCare\n\n';
+                message += 'طريقة الدفع: نقدي عند الاستلام\n';
+                message += 'معلومات العميل:\n';
+                message += 'الاسم: ' + customerName + '\n';
+                message += 'الهاتف: ' + customerPhone + '\n';
+                message += 'العنوان: ' + customerAddress + '\n';
+                message += 'المنطقة: ' + getRegionName(selectedRegion) + '\n\n';
+                message += 'تفاصيل الطلب:\n\n';
+                
+                let subtotal = 0;
+                cart.forEach((item, index) => {
+                    const itemTotal = item.price * item.quantity;
+                    subtotal += itemTotal;
+                    message += (index + 1) + '. ' + item.name + '\n';
+                    message += '   الكمية: ' + item.quantity + '\n';
+                    message += '   السعر: ' + item.price + ' ₪\n';
+                    message += '   المجموع: ' + itemTotal + ' ₪\n\n';
+                });
+                
+                const shippingCost = shippingPrices[selectedRegion];
+                const total = subtotal + shippingCost;
+                
+                message += 'ملخص الفاتورة:\n';
+                message += 'المجموع الفرعي: ' + subtotal + ' ₪\n';
+                message += 'الشحن (' + getRegionName(selectedRegion) + '): ' + shippingCost + ' ₪\n';
+                message += 'الإجمالي النهائي: ' + total + ' ₪\n\n';
+                
+                if (customerNotes) {
+                    message += 'ملاحظات العميل:\n' + customerNotes + '\n\n';
+                }
+                
+                message += 'شكراً لثقتكم بنا. سنقوم بالتواصل معك لتأكيد الطلب.';
+                
+                const lines = cart.map(function(item) {
+                    return {
+                        name: item.name,
+                        quantity: item.quantity,
+                        lineTotal: item.price * item.quantity
+                    };
+                });
+                const payload = {
+                    type: 'cash',
+                    mailSubject: 'طلب جديد - Hadeel SkinCare',
+                    mailBody: message,
+                    customerName: customerName,
+                    customerPhone: customerPhone,
+                    total: total,
+                    regionName: getRegionName(selectedRegion),
+                    paymentLabel: 'نقدي',
+                    lines: lines
+                };
+                try {
+                    sessionStorage.setItem('hadeelLastOrder', JSON.stringify(payload));
+                } catch (e) {}
+                if (typeof window.hadeelPostTelegram === 'function') {
+                    window.hadeelPostTelegram('🛒 طلب جديد — نقدي\n\n' + message);
+                }
+                var waOk = typeof window.hadeelOpenOrderWhatsApp === 'function' && window.hadeelOpenOrderWhatsApp(message);
+                showNotification(
+                    waOk ? 'افتحي واتساب واضغطي «إرسال» لتأكيد الطلب' : 'عبّي رقم واتساب المتجر في telegram-config.js ثم أعيدي المحاولة',
+                    waOk ? 'success' : 'warning'
+                );
+                localStorage.removeItem('hadeelCart');
+                setTimeout(function () {
+                    window.location.href = 'order-confirmation.html';
+                }, waOk ? 500 : 0);
+            }
+            
+            // إتمام الطلب عبر بت
+            window.checkoutViaBit = function() {
+                const cart = JSON.parse(localStorage.getItem('hadeelCart') || '[]');
+                if (cart.length === 0) {
+                    showNotification('السلة فارغة. أضفي بعض المنتجات أولاً', 'error');
+                    return;
+                }
+                
+                // الحصول على بيانات العميل
+                const customerName = document.getElementById('customerName').value.trim();
+                const customerPhone = document.getElementById('customerPhone').value.trim();
+                const customerAddress = document.getElementById('customerAddress').value.trim();
+                const customerNotes = document.getElementById('customerNotes').value.trim();
+                
+                // التحقق من البيانات
+                if (!customerName || !customerPhone || !customerAddress || !selectedRegion) {
+                    showNotification('الرجاء تعبئة جميع البيانات المطلوبة', 'error');
+                    return;
+                }
+                
+                // حساب المبلغ
+                const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                const shippingCost = shippingPrices[selectedRegion];
+                const total = subtotal + shippingCost;
+                
+                // حفظ بيانات الطلب مؤقتاً
+                const orderData = {
+                    customerName,
+                    customerPhone,
+                    customerAddress,
+                    customerNotes,
+                    region: selectedRegion,
+                    regionName: getRegionName(selectedRegion),
+                    cart,
+                    subtotal,
+                    shippingCost,
+                    total,
+                    paymentMethod: 'bit',
+                    timestamp: new Date().toISOString()
+                };
+                
+                localStorage.setItem('pendingBitOrder', JSON.stringify(orderData));
+                
+                // إظهار إشعار تعليمات
+                showNotification('املأ بياناتك ثم امسح رمز QR للدفع عبر بت', 'success');
+                
+                // تأكيد وهمي للدفع (في الواقع سيكون هناك استعلام من الخادم)
+                setTimeout(() => {
+                    const confirmPayment = confirm('هل قمت بالدفع عبر تطبيق بت؟\n\nإذا نعم، سنتصل بك لتأكيد الطلب.\nإذا لا، يمكنك إعادة المحاولة.');
+                    
+                    if (confirmPayment) {
+                        const mail = buildBitMail(orderData);
+                        const lines = orderData.cart.map(function(item) {
+                            return {
+                                name: item.name,
+                                quantity: item.quantity,
+                                lineTotal: item.price * item.quantity
+                            };
+                        });
+                        const payload = {
+                            type: 'bit',
+                            mailSubject: mail.subject,
+                            mailBody: mail.body,
+                            customerName: orderData.customerName,
+                            customerPhone: orderData.customerPhone,
+                            total: orderData.total,
+                            regionName: orderData.regionName,
+                            paymentLabel: 'بت',
+                            lines: lines
+                        };
+                        try {
+                            sessionStorage.setItem('hadeelLastOrder', JSON.stringify(payload));
+                        } catch (e) {}
+                        if (typeof window.hadeelPostTelegram === 'function') {
+                            window.hadeelPostTelegram('🛒 طلب جديد — بت\n\n' + mail.body);
+                        }
+                        var waBit = typeof window.hadeelOpenOrderWhatsApp === 'function' && window.hadeelOpenOrderWhatsApp(mail.body);
+                        showNotification(
+                            waBit ? 'افتحي واتساب واضغطي «إرسال» لتأكيد الطلب' : 'عبّي رقم واتساب المتجر في telegram-config.js',
+                            waBit ? 'success' : 'warning'
+                        );
+                        localStorage.removeItem('pendingBitOrder');
+                        localStorage.removeItem('hadeelCart');
+                        setTimeout(function () {
+                            window.location.href = 'order-confirmation.html';
+                        }, waBit ? 500 : 0);
+                    }
+                }, 3000);
+            }
+            
+            function buildBitMail(orderData) {
+                let message = 'دفعة جديدة عبر بت\n\n';
+                message += 'معلومات العميل:\n';
+                message += 'الاسم: ' + orderData.customerName + '\n';
+                message += 'الهاتف: ' + orderData.customerPhone + '\n';
+                message += 'العنوان: ' + orderData.customerAddress + '\n';
+                message += 'المنطقة: ' + orderData.regionName + '\n';
+                message += 'طريقة الدفع: بت\n\n';
+                message += 'تفاصيل الطلب:\n\n';
+                orderData.cart.forEach(function(item, index) {
+                    const itemTotal = item.price * item.quantity;
+                    message += (index + 1) + '. ' + item.name + '\n';
+                    message += '   الكمية: ' + item.quantity + '\n';
+                    message += '   السعر: ' + item.price + ' ₪\n';
+                    message += '   المجموع: ' + itemTotal + ' ₪\n\n';
+                });
+                message += 'ملخص الفاتورة:\n';
+                message += 'المجموع الفرعي: ' + orderData.subtotal + ' ₪\n';
+                message += 'الشحن (' + orderData.regionName + '): ' + orderData.shippingCost + ' ₪\n';
+                message += 'الإجمالي المدفوع: ' + orderData.total + ' ₪\n\n';
+                if (orderData.customerNotes) {
+                    message += 'ملاحظات العميل:\n' + orderData.customerNotes + '\n\n';
+                }
+                message += 'الوقت: ' + new Date().toLocaleString('ar-EG') + '\n';
+                message += 'الحالة: مدفوع عبر بت\n\n';
+                message += 'يرجى التواصل مع العميل لتأكيد الطلب.\n';
+                return {
+                    subject: 'دفعة بت - ' + orderData.customerName,
+                    body: message
+                };
+            }
+            
+            // تحديث عدد المنتجات في السلة
+            function updateCartCount() {
+                try {
+                    const cart = JSON.parse(localStorage.getItem('hadeelCart') || '[]');
+                    const total = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+                    
+                    // يمكن استخدام هذا في الصفحات الأخرى
+                    const cartCountElements = document.querySelectorAll('.cart-count');
+                    cartCountElements.forEach(element => {
+                        element.textContent = total;
+                    });
+                } catch (e) {
+                    console.error('Error updating cart count:', e);
+                }
+            }
+            
+            // إشعار
+            function showNotification(message, type = 'success') {
+                // إزالة أي إشعارات سابقة
+                const existingNotifications = document.querySelectorAll('.notification');
+                existingNotifications.forEach(notification => {
+                    notification.remove();
+                });
+                
+                // إنشاء إشعار جديد
+                const notification = document.createElement('div');
+                notification.className = `notification ${type}`;
+                notification.innerHTML = `
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'warning' ? 'exclamation-triangle' : 'exclamation-circle'}"></i>
+                    <span>${message}</span>
+                `;
+                
+                document.body.appendChild(notification);
+                
+                // إظهار الإشعار
+                setTimeout(() => {
+                    notification.classList.add('show');
+                }, 10);
+                
+                // إخفاء الإشعار بعد 4 ثوانٍ
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                    setTimeout(() => {
+                        if (notification.parentNode) {
+                            notification.parentNode.removeChild(notification);
+                        }
+                    }, 500);
+                }, 4000);
+            }
+            
+            // استماع لتغييرات النموذج
+            document.addEventListener('input', function(e) {
+                if (e.target.matches('#customerName, #customerPhone, #customerAddress')) {
+                    updateCheckoutButton();
+                }
+            });
+            
+            // التحميل الأولي
+            displayCart();
+            updateCartCount();
+            
+        });
+    </script>
+</body>
+</html>

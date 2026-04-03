@@ -1,0 +1,8 @@
+[build]
+  functions = "netlify/functions"
+
+# نفس المسار على نطاق الموقع (بدل .netlify/functions/...)
+[[redirects]]
+  from = "/api/chat-to-telegram"
+  to = "/.netlify/functions/chat-to-telegram"
+  status = 200

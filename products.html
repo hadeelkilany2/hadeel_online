@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#1a2f4a">
+    <script>try{var t=localStorage.getItem('hadeel-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+    <meta name="description" content="منتجات Hadeel SkinCare الطبيعية للعناية بالبشرة">
+    <title>منتجاتنا - Hadeel SkinCare</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@500;600;700&family=Tajawal:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="page-products">
+    <a href="https://instagram.com/hadeel.k_beauty" class="instagram-side-float" target="_blank" rel="noopener noreferrer" aria-label="إنستغرام Hadeel SkinCare — @hadeel.k_beauty">
+        <i class="fab fa-instagram" aria-hidden="true"></i>
+    </a>
+    <header class="header" id="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-spa"></i>
+                    <div class="logo-text">
+                        <h1>Hadeel SkinCare</h1>
+                        <p>العناية الطبيعية ببشرتك</p>
+                    </div>
+                </a>
+                <div class="nav-links" id="navLinks">
+                    <a href="index.html" class="nav-link">الرئيسية</a>
+                    <a href="products.html" class="nav-link active">المنتجات</a>
+                    <a href="about.html" class="nav-link">من نحن</a>
+                    <a href="cart.html" class="cart-btn">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>السلة</span>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </a>
+                </div>
+                <div class="navbar-end">
+                    <button type="button" class="theme-toggle" id="themeToggle" aria-label="تفعيل الوضع الداكن">
+                        <i class="fas fa-moon theme-toggle__icon theme-toggle__icon--moon" aria-hidden="true"></i>
+                        <i class="fas fa-sun theme-toggle__icon theme-toggle__icon--sun" aria-hidden="true"></i>
+                    </button>
+                    <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" aria-label="فتح القائمة">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="products-hero-carousel" aria-roledescription="عرض شرائح" aria-label="صور المنتجات — يتبدل تلقائياً">
+        <div class="products-hero-carousel__slides" id="productsHeroCarouselSlides"></div>
+        <div class="products-hero-carousel__scrim" aria-hidden="true"></div>
+        <div class="container products-hero-carousel__content">
+            <div class="products-hero-carousel__panel">
+                <span class="products-hero-carousel__eyebrow">منتجاتنا الطبيعية</span>
+                <p class="products-hero-carousel__cat" id="carouselCat"></p>
+                <h2 class="products-hero-carousel__title" id="carouselTitle"></h2>
+                <p class="products-hero-carousel__desc" id="carouselDesc"></p>
+                <div class="products-hero-carousel__price" id="carouselPrice"></div>
+            </div>
+        </div>
+        <button type="button" class="products-hero-carousel__arrow products-hero-carousel__arrow--prev" id="carouselPrev" aria-label="المنتج السابق">
+            <i class="fas fa-chevron-right" aria-hidden="true"></i>
+        </button>
+        <button type="button" class="products-hero-carousel__arrow products-hero-carousel__arrow--next" id="carouselNext" aria-label="المنتج التالي">
+            <i class="fas fa-chevron-left" aria-hidden="true"></i>
+        </button>
+        <div class="products-hero-carousel__dots" id="carouselDots" role="tablist" aria-label="اختيار صورة"></div>
+    </section>
+
+    <section class="filters-section">
+        <div class="container">
+            <div class="filters-grid">
+                <div class="filter-group">
+                    <label for="search"><i class="fas fa-search"></i> بحث عن منتج</label>
+                    <input type="text" id="search" placeholder="ابحث عن منتج...">
+                </div>
+                <div class="filter-group">
+                    <label for="category"><i class="fas fa-tags"></i> التصنيف</label>
+                    <select id="category">
+                        <option value="all">جميع التصنيفات</option>
+                        <option value="bundles">البكجات</option>
+                        <option value="scrubs">المقشرات</option>
+                        <option value="soaps">الصابون</option>
+                        <option value="butters">الزبدات</option>
+                        <option value="care">العناية</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="sort"><i class="fas fa-sort"></i> ترتيب حسب</label>
+                    <select id="sort">
+                        <option value="default">الأكثر صلة</option>
+                        <option value="price-low">السعر: من الأقل للأعلى</option>
+                        <option value="price-high">السعر: من الأعلى للأقل</option>
+                    </select>
+                </div>
+            </div>
+            <div class="filter-buttons">
+                <button type="button" id="applyFilters" class="btn btn-primary">
+                    <i class="fas fa-filter"></i> تطبيق التصفية
+                </button>
+                <button type="button" id="resetFilters" class="btn btn-secondary">
+                    <i class="fas fa-redo"></i> إعادة تعيين
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <main class="products-main">
+        <div class="container">
+            <div class="products-header">
+                <h2 class="products-title">جميع المنتجات</h2>
+                <div id="productsCount" class="products-count">0 منتجات</div>
+            </div>
+            <div id="productsGrid" class="products-grid"></div>
+            <div id="emptyState" class="products-empty" style="display: none;">
+                <i class="fas fa-search"></i>
+                <h3>لم يتم العثور على منتجات</h3>
+                <p>لا توجد منتجات تطابق بحثك</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section footer-brand">
+                    <h3>Hadeel SkinCare</h3>
+                    <p class="footer-brand-text">متجر متخصص في منتجات العناية بالبشرة الطبيعية المصنوعة يدوياً بعناية وحب.</p>
+                    <div class="footer-social">
+                        <a href="https://instagram.com/hadeel.k_beauty" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="إنستغرام"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>روابط سريعة</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html"><i class="fas fa-home"></i> الرئيسية</a></li>
+                        <li><a href="products.html"><i class="fas fa-shopping-bag"></i> المنتجات</a></li>
+                        <li><a href="about.html"><i class="fas fa-info-circle"></i> من نحن</a></li>
+                        <li><a href="cart.html"><i class="fas fa-shopping-cart"></i> سلة التسوق</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>اتصل بنا</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://instagram.com/hadeel.k_beauty" target="_blank" rel="noopener noreferrer" class="footer-contact-link"><i class="fab fa-instagram"></i> @hadeel.k_beauty</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="footer-copyright">© <span id="currentYear">2024</span> Hadeel SkinCare. جميع الحقوق محفوظة.</p>
+                <p class="footer-credit-line">تم التصميم بواسطة <a href="https://instagram.com/ayacode.1" target="_blank" rel="noopener noreferrer">AyaCode studio</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <button class="back-to-top" id="backToTop" aria-label="العودة إلى أعلى الصفحة"><i class="fas fa-arrow-up"></i></button>
+
+    <div id="notification" class="notification notification--bottom success">
+        <i class="fas fa-check"></i>
+        <span id="notificationText"></span>
+    </div>
+
+    <div id="productModal" class="product-modal" role="dialog" aria-modal="true" aria-labelledby="productModalTitle" aria-hidden="true" hidden>
+        <div class="product-modal__backdrop" id="productModalBackdrop" tabindex="-1"></div>
+        <div class="product-modal__panel">
+            <button type="button" class="product-modal__close" id="productModalClose" aria-label="إغلاق النافذة">
+                <i class="fas fa-times" aria-hidden="true"></i>
+            </button>
+            <div class="product-modal__visual" id="productModalVisual"></div>
+            <div class="product-modal__body">
+                <span class="product-modal__cat" id="productModalCat"></span>
+                <h2 id="productModalTitle" class="product-modal__title"></h2>
+                <p class="product-modal__details" id="productModalDetails"></p>
+                <div class="product-modal__footer">
+                    <span class="product-modal__price" id="productModalPrice"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="theme.js"></script>
+    <script src="telegram-config.js"></script>
+    <script src="telegram-notify.js"></script>
+    <script src="chatbot.js"></script>
+    <script>
+
+        const products = [
+            { id: 1, name: 'البكج الكامل', category: 'bundles', description: 'صابونة نيلة، مقشر نيلة، زبدة، ليفة مغربية - باكج متكامل', details: 'باكج متكامل للعناية بالجسم: صابونة نيلة، مقشر نيلة، زبدة ترطيب، وليفة مغربية. مناسب لمن تبحث عن روتين واحد يغطي التنظيف والتقشير والترطيب.', price: 170, image: './images/product-bundle-nila.png' },
+            { id: 2, name: 'مقشر الفانيلا', category: 'scrubs', description: 'تقشير عميق برائحة فانيلا جذابة', details: 'مقشر طبيعي برائحة الفانيلا يساعد على إزالة الجلد الميت ويمنح البشرة ملمساً ناعماً. استخدميه على بشرة رطبة بتدليك لطيف ثم اشطفي.', price: 60, image: './images/product-vanilla-scrub.png' },
+            { id: 3, name: 'صابونة مغربية', category: 'soaps', description: 'تفتيح وتوحيد لون البشرة', details: 'صابونة تقليدية تساعد على تنظيف البشرة بلطف ودعم مظهر أكثر توحيداً مع الاستخدام المنتظم. يُفضّل ترطيب البشرة بعد الغسيل.', price: 70, image: './images/product-moroccan-soap.png' },
+            { id: 4, name: 'ليفة مغربية', category: 'care', description: 'مساعدة على إزالة الجلد الميت', details: 'ليفة للاستحمام تساعد على تقشير الجلد بلطف وتحسين امتصاص المرطبات. استخدميها مع صابونك المفضل دون فرك قاسٍ.', price: 20, image: './images/product-moroccan-loofah.png' },
+            { id: 5, name: 'مقشر نيلة', category: 'scrubs', description: 'تقشير وترطيب برائحة النيلة', details: 'مزيج تقشير وترطيب مع رائحة النيلة المميزة. يفيد بشرة الجسم ويمنحها نعومة بعد الاستخدام المنتظم.', price: 60, image: './images/product-nila-scrub.png' },
+            { id: 6, name: 'زبدة برائحة سويت', category: 'butters', description: 'ترطيب عميق وطويل الأمد', details: 'زبدة جسم بتركيبة غنية للترطيب العميق، برائحة حلوة مريحة. مناسبة بعد الاستحمام مباشرة على بشرة شبه جافة.', price: 40, image: './images/product-sweet-butter.png' },
+            { id: 7, name: 'كعب الغزال', category: 'care', description: 'عناية بالقدمين وتنعيمها', details: 'منتج عناية بالقدمين يساعد على تنعيم المناطق الخشنة. يُطبّق على القدمين مع تدليك خفيف حسب الحاجة.', price: 30, image: './images/product-kaab-el-ghazal.png' },
+            { id: 8, name: 'صابونة نيلة', category: 'soaps', description: 'تفتيح البشرة وتنعيمها', details: 'صابونة غنية بمكونات تدعم إشراق البشرة ونعومتها. للوجه أو الجسم حسب التعليمات؛ يُفضّل ترطيب البشرة بعدها.', price: 70, image: './images/product-nila-soap.png' }
+        ];
+
+        const productsGrid = document.getElementById('productsGrid');
+        const cartCount = document.getElementById('cartCount');
+        const searchInput = document.getElementById('search');
+        const categorySelect = document.getElementById('category');
+        const sortSelect = document.getElementById('sort');
+        const applyFiltersBtn = document.getElementById('applyFilters');
+        const resetFiltersBtn = document.getElementById('resetFilters');
+        const emptyState = document.getElementById('emptyState');
+        const productsCount = document.getElementById('productsCount');
+        const notification = document.getElementById('notification');
+        const notificationText = document.getElementById('notificationText');
+        const backToTopBtn = document.getElementById('backToTop');
+
+        let cart = JSON.parse(localStorage.getItem('hadeelCart') || '[]');
+
+        function updateCartCount() {
+            const total = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+            cartCount.textContent = total;
+        }
+
+        function addToCart(product, quantity) {
+            const existingItem = cart.find(item => item.id === product.id);
+            if (existingItem) {
+                existingItem.quantity += quantity;
+            } else {
+                cart.push({ id: product.id, name: product.name, price: product.price, quantity: quantity, image: product.image });
+            }
+            localStorage.setItem('hadeelCart', JSON.stringify(cart));
+            updateCartCount();
+            showNotification(product.name + ' أضيف إلى السلة');
+        }
+
+        function showNotification(message) {
+            notificationText.textContent = message;
+            notification.classList.add('show');
+            setTimeout(() => notification.classList.remove('show'), 3000);
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function updateQuantityInCard(button, change) {
+            const card = button.closest('.product-card');
+            if (!card) return;
+            const qtyEl = card.querySelector('.qty-value');
+            if (!qtyEl) return;
+            let currentQty = parseInt(qtyEl.textContent, 10) + change;
+            if (currentQty < 1) currentQty = 1;
+            qtyEl.textContent = currentQty;
+        }
+
+        function addToCartFromCard(button) {
+            const card = button.closest('.product-card');
+            if (!card) return;
+            const productId = parseInt(card.dataset.productId, 10);
+            const product = products.find(p => p.id === productId);
+            const qtyEl = card.querySelector('.qty-value');
+            if (!product || !qtyEl) return;
+            const quantity = parseInt(qtyEl.textContent, 10);
+            addToCart(product, quantity);
+            qtyEl.textContent = '1';
+        }
+
+        var carouselTimer = null;
+        var carouselIndex = 0;
+        var CAROUSEL_AUTO_MS = 5000;
+
+        function createProductCard(product, index) {
+            const card = document.createElement('div');
+            card.className = 'product-card product-card--visual';
+            card.dataset.productId = String(product.id);
+            if (typeof index === 'number') card.style.animationDelay = (index * 0.08) + 's';
+            const bgUrl = product.image.replace(/'/g, '%27');
+            card.style.setProperty('--product-bg', 'url("' + bgUrl + '")');
+            card.innerHTML =
+                '<span class="product-card__tap-hint"><i class="fas fa-circle-info" aria-hidden="true"></i> اضغطي للتفاصيل</span>' +
+                '<div class="product-content product-content--on-image">' +
+                '<div class="product-category">' + escapeHtml(getCategoryName(product.category)) + '</div>' +
+                '<h3 class="product-name">' + escapeHtml(product.name) + '</h3>' +
+                '<p class="product-description">' + escapeHtml(product.description) + '</p>' +
+                '<div class="product-price">' + product.price + '</div>' +
+                '<div class="product-actions">' +
+                '<div class="quantity-controls">' +
+                '<button type="button" class="qty-btn" data-qty-minus="' + product.id + '">-</button>' +
+                '<span class="qty-value">1</span>' +
+                '<button type="button" class="qty-btn" data-qty-plus="' + product.id + '">+</button>' +
+                '</div>' +
+                '<button type="button" class="add-to-cart" data-add="' + product.id + '">' +
+                '<i class="fas fa-cart-plus"></i> أضف للسلة</button>' +
+                '</div></div>';
+            card.addEventListener('click', function(e) {
+                if (e.target.closest('.product-actions')) return;
+                openProductModal(product);
+            });
+            card.querySelector('[data-qty-minus="' + product.id + '"]').addEventListener('click', function(e) {
+                e.stopPropagation();
+                updateQuantityInCard(this, -1);
+            });
+            card.querySelector('[data-qty-plus="' + product.id + '"]').addEventListener('click', function(e) {
+                e.stopPropagation();
+                updateQuantityInCard(this, 1);
+            });
+            card.querySelector('[data-add="' + product.id + '"]').addEventListener('click', function(e) {
+                e.stopPropagation();
+                addToCartFromCard(this);
+            });
+            return card;
+        }
+
+        function updateCarouselCaption(i) {
+            const p = products[i];
+            if (!p) return;
+            const catEl = document.getElementById('carouselCat');
+            const titleEl = document.getElementById('carouselTitle');
+            const descEl = document.getElementById('carouselDesc');
+            const priceEl = document.getElementById('carouselPrice');
+            if (catEl) catEl.textContent = getCategoryName(p.category);
+            if (titleEl) titleEl.textContent = p.name;
+            if (descEl) descEl.textContent = p.description;
+            if (priceEl) priceEl.textContent = p.price + ' ₪';
+        }
+
+        function goCarousel(i) {
+            const n = products.length;
+            if (!n) return;
+            i = ((i % n) + n) % n;
+            carouselIndex = i;
+            document.querySelectorAll('.products-hero-carousel__slide').forEach(function(el, idx) {
+                el.classList.toggle('is-active', idx === i);
+            });
+            document.querySelectorAll('.products-hero-carousel__dot').forEach(function(el, idx) {
+                el.classList.toggle('is-active', idx === i);
+                el.setAttribute('aria-selected', idx === i ? 'true' : 'false');
+            });
+            updateCarouselCaption(i);
+        }
+
+        function startCarouselTimer() {
+            if (carouselTimer) clearInterval(carouselTimer);
+            if (products.length <= 1) return;
+            carouselTimer = setInterval(function() {
+                goCarousel(carouselIndex + 1);
+            }, CAROUSEL_AUTO_MS);
+        }
+
+        function userCarouselStep(delta) {
+            goCarousel(carouselIndex + delta);
+            startCarouselTimer();
+        }
+
+        function renderHeroCarousel() {
+            const slidesRoot = document.getElementById('productsHeroCarouselSlides');
+            const dotsRoot = document.getElementById('carouselDots');
+            if (!slidesRoot || !dotsRoot) return;
+            slidesRoot.innerHTML = '';
+            dotsRoot.innerHTML = '';
+            products.forEach(function(product, i) {
+                const slide = document.createElement('div');
+                slide.className = 'products-hero-carousel__slide' + (i === 0 ? ' is-active' : '');
+                slide.setAttribute('role', 'img');
+                slide.setAttribute('aria-label', product.name);
+                slide.style.backgroundImage = 'url("' + product.image.replace(/"/g, '\\"') + '")';
+                slide.addEventListener('click', function() {
+                    openProductModal(product);
+                });
+                slidesRoot.appendChild(slide);
+
+                const dot = document.createElement('button');
+                dot.type = 'button';
+                dot.className = 'products-hero-carousel__dot' + (i === 0 ? ' is-active' : '');
+                dot.setAttribute('role', 'tab');
+                dot.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+                dot.setAttribute('aria-label', 'عرض ' + product.name);
+                (function(idx) {
+                    dot.addEventListener('click', function() {
+                        goCarousel(idx);
+                        startCarouselTimer();
+                    });
+                })(i);
+                dotsRoot.appendChild(dot);
+            });
+            carouselIndex = 0;
+            updateCarouselCaption(0);
+            startCarouselTimer();
+        }
+
+        function openProductModal(product) {
+            const modal = document.getElementById('productModal');
+            const visual = document.getElementById('productModalVisual');
+            if (!modal || !visual) return;
+            const detailsText = product.details || product.description;
+            visual.style.backgroundImage = 'url("' + product.image.replace(/"/g, '\\"') + '")';
+            document.getElementById('productModalCat').textContent = getCategoryName(product.category);
+            document.getElementById('productModalTitle').textContent = product.name;
+            document.getElementById('productModalDetails').textContent = detailsText;
+            document.getElementById('productModalPrice').textContent = product.price + ' ₪';
+            modal.removeAttribute('hidden');
+            modal.classList.add('is-open');
+            modal.setAttribute('aria-hidden', 'false');
+            document.body.classList.add('product-modal-open');
+            document.getElementById('productModalClose').focus();
+        }
+
+        function closeProductModal() {
+            const modal = document.getElementById('productModal');
+            if (!modal || !modal.classList.contains('is-open')) return;
+            modal.classList.remove('is-open');
+            modal.setAttribute('aria-hidden', 'true');
+            modal.setAttribute('hidden', '');
+            document.body.classList.remove('product-modal-open');
+        }
+
+        function renderProducts(filteredProducts) {
+            productsGrid.innerHTML = '';
+            if (filteredProducts.length === 0) {
+                emptyState.style.display = 'block';
+                return;
+            }
+            emptyState.style.display = 'none';
+            filteredProducts.forEach((product, index) => {
+                productsGrid.appendChild(createProductCard(product, index));
+            });
+        }
+
+        function getCategoryName(category) {
+            const categories = { bundles: 'البكجات', scrubs: 'المقشرات', soaps: 'الصابون', care: 'العناية', butters: 'الزبدات' };
+            return categories[category] || category;
+        }
+
+        function applyFilters() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const category = categorySelect.value;
+            const sort = sortSelect.value;
+            let filtered = products.slice();
+            if (searchTerm) {
+                filtered = filtered.filter(p =>
+                    p.name.toLowerCase().includes(searchTerm) ||
+                    p.description.toLowerCase().includes(searchTerm) ||
+                    (p.details && p.details.toLowerCase().includes(searchTerm))
+                );
+            }
+            if (category !== 'all') {
+                filtered = filtered.filter(p => p.category === category);
+            }
+            if (sort === 'price-low') filtered.sort((a, b) => a.price - b.price);
+            else if (sort === 'price-high') filtered.sort((a, b) => b.price - a.price);
+            productsGrid.style.opacity = '0.5';
+            setTimeout(() => {
+                renderProducts(filtered);
+                productsCount.textContent = filtered.length + ' منتجات';
+                productsGrid.style.opacity = '1';
+            }, 200);
+        }
+
+        function resetFilters() {
+            searchInput.value = '';
+            categorySelect.value = 'all';
+            sortSelect.value = 'default';
+            applyFilters();
+        }
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) backToTopBtn.classList.add('show');
+            else backToTopBtn.classList.remove('show');
+        });
+        backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+            cart = JSON.parse(localStorage.getItem('hadeelCart') || '[]');
+            updateCartCount();
+
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const navLinks = document.getElementById('navLinks');
+            mobileMenuBtn.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                this.innerHTML = navLinks.classList.contains('active') ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+            });
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                });
+            });
+            const cartBtnNav = document.querySelector('.cart-btn');
+            if (cartBtnNav) {
+                cartBtnNav.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                });
+            }
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 50) header.classList.add('scrolled');
+                else header.classList.remove('scrolled');
+            });
+
+            renderProducts(products);
+            renderHeroCarousel();
+            document.addEventListener('visibilitychange', function() {
+                if (document.hidden) {
+                    if (carouselTimer) clearInterval(carouselTimer);
+                    carouselTimer = null;
+                } else {
+                    startCarouselTimer();
+                }
+            });
+            productsCount.textContent = products.length + ' منتجات';
+            const carouselPrev = document.getElementById('carouselPrev');
+            const carouselNext = document.getElementById('carouselNext');
+            if (carouselPrev) carouselPrev.addEventListener('click', function() { userCarouselStep(-1); });
+            if (carouselNext) carouselNext.addEventListener('click', function() { userCarouselStep(1); });
+            applyFiltersBtn.addEventListener('click', applyFilters);
+            resetFiltersBtn.addEventListener('click', resetFilters);
+            searchInput.addEventListener('input', () => {
+                clearTimeout(searchInput.timeout);
+                searchInput.timeout = setTimeout(applyFilters, 300);
+            });
+
+            const productModalClose = document.getElementById('productModalClose');
+            const productModalBackdrop = document.getElementById('productModalBackdrop');
+            if (productModalClose) productModalClose.addEventListener('click', closeProductModal);
+            if (productModalBackdrop) productModalBackdrop.addEventListener('click', closeProductModal);
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') closeProductModal();
+            });
+        });
+    </script>
+</body>
+</html>

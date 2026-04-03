@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#1a2f4a">
+    <script>try{var t=localStorage.getItem('hadeel-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+    <meta name="description" content="Hadeel SkinCare - منتجات طبيعية للعناية بالبشرة. تقشير عميق، ترطيب مكثف، تفتيح البشرة">
+    <title>Hadeel SkinCare - العناية الطبيعية ببشرتك</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@500;600;700&family=Tajawal:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <a href="https://instagram.com/hadeel.k_beauty" class="instagram-side-float" target="_blank" rel="noopener noreferrer" aria-label="إنستغرام Hadeel SkinCare — @hadeel.k_beauty">
+        <i class="fab fa-instagram" aria-hidden="true"></i>
+    </a>
+    <!-- الهيدر -->
+    <header class="header" id="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-spa"></i>
+                    <div class="logo-text">
+                        <h1>Hadeel SkinCare</h1>
+                        <p>العناية الطبيعية ببشرتك</p>
+                    </div>
+                </a>
+                <div class="nav-links" id="navLinks">
+                    <a href="index.html" class="nav-link active">الرئيسية</a>
+                    <a href="products.html" class="nav-link">المنتجات</a>
+                    <a href="about.html" class="nav-link">من نحن</a>
+                    <a href="cart.html" class="cart-btn">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>السلة</span>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </a>
+                </div>
+                <div class="navbar-end">
+                    <button type="button" class="theme-toggle" id="themeToggle" aria-label="تفعيل الوضع الداكن">
+                        <i class="fas fa-moon theme-toggle__icon theme-toggle__icon--moon" aria-hidden="true"></i>
+                        <i class="fas fa-sun theme-toggle__icon theme-toggle__icon--sun" aria-hidden="true"></i>
+                    </button>
+                    <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" aria-label="فتح القائمة">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero section: صورة بملء الشاشة تحت الهيدر -->
+    <section class="hero hero-section" id="hero" aria-label="مقدمة الموقع">
+        <div class="hero-media" aria-hidden="true">
+            <img src="./images/hero-main.png" alt="" class="hero-media__img" fetchpriority="high"
+                 onerror="this.closest('.hero-media').classList.add('hero-media--fallback'); this.style.display='none';">
+        </div>
+        <div class="hero-media-scrim" aria-hidden="true"></div>
+        <div class="container hero-inner">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <span class="hero-eyebrow">طبيعي · يدوي · بجودة عالية</span>
+                    <h1>اكتشفي جمال بشرتك مع Hadeel SkinCare</h1>
+                    <p>نقدم لك أفضل منتجات العناية بالبشرة الطبيعية المصنوعة بعناية فائقة لتحصلي على بشرة نضرة ومشرقة. جربي منتجاتنا واستمتعي بفوائدها الفريدة.</p>
+                    <div class="hero-cta">
+                        <a href="products.html" class="btn">
+                            <i class="fas fa-shopping-bag"></i>
+                            استعرض المنتجات
+                        </a>
+                        <a href="#features" class="btn btn-secondary">
+                            <i class="fas fa-star"></i>
+                            مميزاتنا
+                        </a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <span class="stat-number">50+</span>
+                            <span class="stat-label">عميل راضي</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">100%</span>
+                            <span class="stat-label">منتجات طبيعية</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">⭐ 4.9</span>
+                            <span class="stat-label">تقييم العملاء</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الميزات -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <span class="eyebrow">لماذا نحن</span>
+                <h2>لماذا تختارين منتجاتنا؟</h2>
+                <p>نحن نقدم حلولاً طبيعية وفعالة للعناية ببشرتك، مصممة خصيصاً لتحقيق أفضل النتائج</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-spa"></i>
+                    </div>
+                    <h3>تقشير عميق</h3>
+                    <p>منتجاتنا تساعد على إزالة الجلد الميت والتخفيف من مظهر جلد الوزّة، لتحصلي على بشرة ناعمة ومشرقة.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-tint"></i>
+                    </div>
+                    <h3>ترطيب مكثف</h3>
+                    <p>تركيباتنا الغنية بالزيوت الطبيعية ترطب البشرة بعمق وتعالج نشفان الجلد، لتبقى بشرتك ناعمة وصحية.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>تفتيح البشرة</h3>
+                    <p>تساهم منتجاتنا في تفتيح وتوحيد لون الجسم بشكل ملحوظ، لتحصلي على بشرة أكثر إشراقاً.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم المنتجات -->
+    <section class="products-preview" id="products">
+        <div class="container">
+            <div class="section-title">
+                <span class="eyebrow">المتجر</span>
+                <h2>منتجاتنا المميزة</h2>
+                <p>استعرضي تشكيلتنا المميزة من أفضل منتجات العناية بالبشرة</p>
+            </div>
+            
+        </div>
+
+        <div class="products-train-fullbleed">
+            <p class="products-train-hint"><i class="fas fa-train" aria-hidden="true"></i> مرّي المنتجات — توقف عند التمرير</p>
+            <div class="products-train" dir="ltr">
+                <div class="products-train-track">
+                    <div class="products-train-group" aria-hidden="false">
+                        <div class="product-card" onclick="window.location.href='products.html'">
+                            <div class="product-image">
+                                <div class="image-loading"></div>
+                                <img src="./images/product-bundle-nila.png" alt="بكج النيلة — مرطبانات مقشر وكريم بدرجات الأزرق على خلفية بيضاء - Hadeel SkinCare"
+                                     onload="this.previousElementSibling.style.display='none';"
+                                     onerror="this.style.display='none'; this.previousElementSibling.style.display='none';">
+                                <span class="product-badge">الأكثر مبيعاً</span>
+                                <div class="image-error" style="display: none;">
+                                    <i class="fas fa-gift"></i>
+                                    <p>بكج العناية المتكامل</p>
+                                </div>
+                            </div>
+                            <div class="product-content">
+                                <div class="product-category">البكجات</div>
+                                <h3 class="product-title">بكج العناية المتكامل</h3>
+                                <p class="product-description">مجموعة متكاملة تضم أفضل منتجات العناية بالبشرة لنتائج مثالية.</p>
+                                <div class="product-price">170</div>
+                            </div>
+                        </div>
+                        <div class="product-card" onclick="window.location.href='products.html'">
+                            <div class="product-image">
+                                <div class="image-loading"></div>
+                                <img src="./images/product-vanilla-scrub.png" alt="مقشر فانيلا وردي في مرطبان على رخام أبيض مع حبوب فانيلا وأوركيد - Hadeel SkinCare"
+                                     onload="this.previousElementSibling.style.display='none';"
+                                     onerror="this.style.display='none'; this.previousElementSibling.style.display='none';">
+                                <span class="product-badge">جديد</span>
+                                <div class="image-error" style="display: none;">
+                                    <i class="fas fa-scrubber"></i>
+                                    <p>مقشر الفانيلا</p>
+                                </div>
+                            </div>
+                            <div class="product-content">
+                                <div class="product-category">المقشرات</div>
+                                <h3 class="product-title">مقشر الفانيلا للجسم</h3>
+                                <p class="product-description">تقشير عميق مع ترطيب غني برائحة فانيلا جذابة.</p>
+                                <div class="product-price">60</div>
+                            </div>
+                        </div>
+                        <div class="product-card" onclick="window.location.href='products.html'">
+                            <div class="product-image">
+                                <div class="image-loading"></div>
+                                <img src="./images/product-moroccan-soap.png" alt="صابونة مغربية سوداء في مرطبان زجاجي مع غطاء أبيض على قماش أبيض - Hadeel SkinCare"
+                                     onload="this.previousElementSibling.style.display='none';"
+                                     onerror="this.style.display='none'; this.previousElementSibling.style.display='none';">
+                                <div class="image-error" style="display: none;">
+                                    <i class="fas fa-soap"></i>
+                                    <p>الصابونة المغربية</p>
+                                </div>
+                            </div>
+                            <div class="product-content">
+                                <div class="product-category">الصابون</div>
+                                <h3 class="product-title">الصابونة المغربية</h3>
+                                <p class="product-description">تفتيح وتوحيد لون البشرة مع إزالة الجلد الميت.</p>
+                                <div class="product-price">70</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="products-train-group" aria-hidden="true">
+                        <div class="product-card" onclick="window.location.href='products.html'" tabindex="-1">
+                            <div class="product-image">
+                                <div class="image-loading"></div>
+                                <img src="./images/product-bundle-nila.png" alt="" loading="lazy"
+                                     onload="this.previousElementSibling.style.display='none';"
+                                     onerror="this.style.display='none'; this.previousElementSibling.style.display='none';">
+                                <span class="product-badge">الأكثر مبيعاً</span>
+                                <div class="image-error" style="display: none;">
+                                    <i class="fas fa-gift"></i>
+                                    <p>بكج العناية المتكامل</p>
+                                </div>
+                            </div>
+                            <div class="product-content">
+                                <div class="product-category">البكجات</div>
+                                <h3 class="product-title">بكج العناية المتكامل</h3>
+                                <p class="product-description">مجموعة متكاملة تضم أفضل منتجات العناية بالبشرة لنتائج مثالية.</p>
+                                <div class="product-price">170</div>
+                            </div>
+                        </div>
+                        <div class="product-card" onclick="window.location.href='products.html'" tabindex="-1">
+                            <div class="product-image">
+                                <div class="image-loading"></div>
+                                <img src="./images/product-vanilla-scrub.png" alt="" loading="lazy"
+                                     onload="this.previousElementSibling.style.display='none';"
+                                     onerror="this.style.display='none'; this.previousElementSibling.style.display='none';">
+                                <span class="product-badge">جديد</span>
+                                <div class="image-error" style="display: none;">
+                                    <i class="fas fa-scrubber"></i>
+                                    <p>مقشر الفانيلا</p>
+                                </div>
+                            </div>
+                            <div class="product-content">
+                                <div class="product-category">المقشرات</div>
+                                <h3 class="product-title">مقشر الفانيلا للجسم</h3>
+                                <p class="product-description">تقشير عميق مع ترطيب غني برائحة فانيلا جذابة.</p>
+                                <div class="product-price">60</div>
+                            </div>
+                        </div>
+                        <div class="product-card" onclick="window.location.href='products.html'" tabindex="-1">
+                            <div class="product-image">
+                                <div class="image-loading"></div>
+                                <img src="./images/product-moroccan-soap.png" alt="" loading="lazy"
+                                     onload="this.previousElementSibling.style.display='none';"
+                                     onerror="this.style.display='none'; this.previousElementSibling.style.display='none';">
+                                <div class="image-error" style="display: none;">
+                                    <i class="fas fa-soap"></i>
+                                    <p>الصابونة المغربية</p>
+                                </div>
+                            </div>
+                            <div class="product-content">
+                                <div class="product-category">الصابون</div>
+                                <h3 class="product-title">الصابونة المغربية</h3>
+                                <p class="product-description">تفتيح وتوحيد لون البشرة مع إزالة الجلد الميت.</p>
+                                <div class="product-price">70</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="section-cta">
+                <a href="products.html" class="btn">
+                    <i class="fas fa-chevron-left"></i>
+                    عرض جميع المنتجات
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- من نحن — هيرو بنفس أسلوب الصفحة الرئيسية -->
+    <section class="hero home-about-hero" id="about" aria-label="من نحن">
+        <div class="hero-media" aria-hidden="true">
+            <img src="./images/image22.jpeg" alt="" class="hero-media__img" loading="lazy"
+                 onerror="this.closest('.hero-media').classList.add('hero-media--fallback'); this.style.display='none';">
+        </div>
+        <div class="hero-media-scrim" aria-hidden="true"></div>
+        <div class="container hero-inner">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <span class="hero-eyebrow">من نحن</span>
+                    <h2>قصة Hadeel SkinCare</h2>
+                    <p>بدأت رحلتنا بفكرة بسيطة: منتجات طبيعية للعناية بالبشرة، مصنوعة يدوياً بأفضل المكونات. نجمع بين الحكمة التقليدية والابتكار لنقدّم لكِ بشرة ناعمة ومشرقة، بعيداً عن المكوّنات الكيميائية الضارة.</p>
+                    <div class="hero-cta">
+                        <a href="about.html" class="btn">
+                            <i class="fas fa-info-circle"></i>
+                            تعرّفي أكثر علينا
+                        </a>
+                        <a href="products.html" class="btn btn-secondary">
+                            <i class="fas fa-shopping-bag"></i>
+                            استعرضي المنتجات
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section footer-brand">
+                    <h3>Hadeel SkinCare</h3>
+                    <p class="footer-brand-text">متجر متخصص في منتجات العناية بالبشرة الطبيعية المصنوعة يدوياً بعناية وحب.</p>
+                    <div class="footer-social">
+                        <a href="https://instagram.com/hadeel.k_beauty" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="إنستغرام"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>روابط سريعة</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html"><i class="fas fa-home"></i> الرئيسية</a></li>
+                        <li><a href="products.html"><i class="fas fa-shopping-bag"></i> المنتجات</a></li>
+                        <li><a href="about.html"><i class="fas fa-info-circle"></i> من نحن</a></li>
+                        <li><a href="cart.html"><i class="fas fa-shopping-cart"></i> سلة التسوق</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>اتصل بنا</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://instagram.com/hadeel.k_beauty" target="_blank" rel="noopener noreferrer" class="footer-contact-link"><i class="fab fa-instagram"></i> @hadeel.k_beauty</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="footer-copyright">© <span id="currentYear">2024</span> Hadeel SkinCare. جميع الحقوق محفوظة.</p>
+                <p class="footer-credit-line">تم التصميم بواسطة <a href="https://instagram.com/ayacode.1" target="_blank" rel="noopener noreferrer">AyaCode studio</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- زر العودة للأعلى -->
+    <button class="back-to-top" id="backToTop" aria-label="العودة إلى أعلى الصفحة">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="theme.js"></script>
+    <script src="telegram-config.js"></script>
+    <script src="telegram-notify.js"></script>
+    <script src="chatbot.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // تحديث سنة الفوتر
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+            
+            // إدارة القائمة للجوال
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const navLinks = document.getElementById('navLinks');
+            
+            mobileMenuBtn.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                this.innerHTML = navLinks.classList.contains('active') 
+                    ? '<i class="fas fa-times"></i>' 
+                    : '<i class="fas fa-bars"></i>';
+            });
+            
+            // إغلاق القائمة عند النقر على رابط
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                });
+            });
+
+            const cartBtnNav = document.querySelector('.cart-btn');
+            if (cartBtnNav) {
+                cartBtnNav.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                });
+            }
+            
+            // تأثير التمرير على الهيدر
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+            
+            // زر العودة للأعلى
+            const backToTopBtn = document.getElementById('backToTop');
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTopBtn.classList.add('show');
+                } else {
+                    backToTopBtn.classList.remove('show');
+                }
+            });
+            
+            backToTopBtn.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // تحديث عدد المنتجات في السلة
+            function updateCartCount() {
+                try {
+                    const cart = JSON.parse(localStorage.getItem('hadeelCart') || '[]');
+                    const total = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+                    document.getElementById('cartCount').textContent = total;
+                } catch (e) {
+                    console.error('Error updating cart count:', e);
+                }
+            }
+            
+            // معالجة أخطاء الصور
+            function handleImageErrors() {
+                document.querySelectorAll('.product-image img').forEach(img => {
+                    img.addEventListener('error', function() {
+                        this.style.display = 'none';
+                        const loadingElement = this.previousElementSibling;
+                        if (loadingElement && loadingElement.classList.contains('image-loading')) {
+                            loadingElement.style.display = 'none';
+                        }
+                        
+                        // إظهار البديل
+                        const errorDiv = this.nextElementSibling;
+                        if (errorDiv && errorDiv.classList.contains('image-error')) {
+                            errorDiv.style.display = 'flex';
+                        }
+                    });
+                    
+                    img.addEventListener('load', function() {
+                        const loadingElement = this.previousElementSibling;
+                        if (loadingElement && loadingElement.classList.contains('image-loading')) {
+                            loadingElement.style.display = 'none';
+                        }
+                    });
+                });
+            }
+            
+            // تشغيل معالجة أخطاء الصور
+            handleImageErrors();
+            
+            // تحديث عدد المنتجات عند التحميل
+            updateCartCount();
+        });
+    </script>
+</body>
+</html>

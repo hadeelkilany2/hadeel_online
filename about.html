@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#1a2f4a">
+    <script>try{var t=localStorage.getItem('hadeel-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+    <meta name="description" content="تعرفي على Hadeel SkinCare - قصتنا، رؤيتنا، ورسالتنا في تقديم أفضل منتجات العناية بالبشرة الطبيعية">
+    <title>من نحن - Hadeel SkinCare</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@500;600;700&family=Tajawal:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <a href="https://instagram.com/hadeel.k_beauty" class="instagram-side-float" target="_blank" rel="noopener noreferrer" aria-label="إنستغرام Hadeel SkinCare — @hadeel.k_beauty">
+        <i class="fab fa-instagram" aria-hidden="true"></i>
+    </a>
+    <!-- الهيدر -->
+    <header class="header" id="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-spa"></i>
+                    <div class="logo-text">
+                        <h1>Hadeel SkinCare</h1>
+                        <p>العناية الطبيعية ببشرتك</p>
+                    </div>
+                </a>
+                <div class="nav-links" id="navLinks">
+                    <a href="index.html" class="nav-link">الرئيسية</a>
+                    <a href="products.html" class="nav-link">المنتجات</a>
+                    <a href="about.html" class="nav-link active">من نحن</a>
+                    <a href="cart.html" class="cart-btn">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>السلة</span>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </a>
+                </div>
+                <div class="navbar-end">
+                    <button type="button" class="theme-toggle" id="themeToggle" aria-label="تفعيل الوضع الداكن">
+                        <i class="fas fa-moon theme-toggle__icon theme-toggle__icon--moon" aria-hidden="true"></i>
+                        <i class="fas fa-sun theme-toggle__icon theme-toggle__icon--sun" aria-hidden="true"></i>
+                    </button>
+                    <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" aria-label="فتح القائمة">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- هيرو الصفحة -->
+    <section class="page-hero">
+        <div class="container">
+            <span class="eyebrow">تعرّفي علينا</span>
+            <h1>من نحن</h1>
+            <p>تعرفي على قصة Hadeel SkinCare، رحلتنا، وقيمنا في تقديم أفضل منتجات العناية بالبشرة الطبيعية</p>
+        </div>
+    </section>
+
+    <!-- قسم عنا -->
+    <section class="about-section">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>قصة Hadeel SkinCare</h2>
+                    <p>بدأت رحلتنا بفكرة بسيطة: تقديم منتجات طبيعية 100% للعناية بالبشرة، مصنوعة بأيدٍ عربية بأفضل المكونات الطبيعية. نشأنا من حبنا للجمال والعناية بالبشرة، ورغبتنا في توفير بدائل صحية وآمنة للمنتجات الكيميائية المتوفرة في السوق.</p>
+                    <p>بعد سنوات من البحث والتجربة، توصلنا إلى تركيبات فريدة تجمع بين الحكمة التقليدية والابتكار الحديث. كل منتج من منتجاتنا مصنوع بحب وعناية، مع الالتزام بأعلى معايير الجودة والنقاء.</p>
+                    <p>نؤمن بأن الجمال الحقيقي يبدأ من الداخل، وهذا ما دفعنا لاختيار مكونات طبيعية تعمل في تناغم مع طبيعة بشرتك، لتحصلي على نتائج مذهلة دون أي آثار جانبية.</p>
+                </div>
+                
+                <div class="about-image">
+                    <img src="./images/image22.jpeg" alt="قصة Hadeel SkinCare" 
+                         onerror="handleImageError(this)">
+                    <div class="image-error" style="display: none;">
+                        <i class="fas fa-heart"></i>
+                        <p>Hadeel SkinCare</p>
+                        <p style="font-size: 0.9rem; margin-top: 10px;">من قلب عملنا إلى بشرتكم</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم القيم -->
+    <section class="values-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>قيمنا الأساسية</h2>
+                <p>هذه المبادئ التي نلتزم بها في كل ما نفعله</p>
+            </div>
+            
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>طبيعية 100%</h3>
+                    <p>جميع منتجاتنا مصنوعة من مكونات طبيعية خالصة، خالية من المواد الكيميائية الضارة والبارابين والسيليكون.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-hand-sparkles"></i>
+                    </div>
+                    <h3>مصنوع يدوياً</h3>
+                    <p>كل منتج يصنع بأيدٍ خبيرة وبحب، مع الاهتمام بكل التفاصيل لضمان الجودة العالية والنتائج المميزة.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>جودة مضمونة</h3>
+                    <p>نلتزم بأعلى معايير الجودة في اختيار المكونات وتصنيع المنتجات، مع ضمان رضاكم التام.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>خدمة عملاء متميزة</h3>
+                    <p>نضع عملائنا في المقام الأول، ونسعى لتقديم تجربة تسوق استثنائية ودعم مستمر.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم المهمة والرؤية -->
+    <section class="mission-vision">
+        <div class="container">
+            <div class="mission-vision-grid">
+                <div class="mission-card">
+                    <h3><i class="fas fa-bullseye"></i> مهمتنا</h3>
+                    <p>نسعى لتقديم منتجات عالية الجودة للعناية بالبشرة مصنوعة من مكونات طبيعية 100%، تساعد النساء على اكتساب بشرة صحية ومشرقة مع الحفاظ على البيئة ودعم المجتمع المحلي.</p>
+                    <p>نهدف لجعل العناية بالبشرة الطبيعية جزءاً أساسياً من روتين الجمال اليومي لكل امرأة، من خلال منتجات فعالة وآمنة تناسب جميع أنواع البشرة.</p>
+                </div>
+                
+                <div class="vision-card">
+                    <h3><i class="fas fa-eye"></i> رؤيتنا</h3>
+                    <p>أن نصبح الوجهة الأولى للعناية بالبشرة الطبيعية في الوطن العربي، وأن نكون نموذجاً يحتذى به في مجال التجميل الطبيعي والعناية بالبشرة.</p>
+                    <p>نسعى لخلق مجتمع من النساء الواعيات بأهمية استخدام المنتجات الطبيعية، وتسليط الضوء على جمال البشرة الطبيعية والصحية دون الحاجة للمواد الكيميائية.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الاتصال -->
+    <section class="contact-cta">
+        <div class="container">
+            <h2>هل لديكم أسئلة أو استفسارات؟</h2>
+            <p>فريقنا متاح دائماً للإجابة على جميع استفساراتكم ومساعدتكم في اختيار المنتجات المناسبة لبشرتكم</p>
+            <a href="https://instagram.com/hadeel.k_beauty" class="btn" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-instagram"></i>
+                تابعينا على إنستغرام
+            </a>
+            <p class="contact-cta-note">راسلونا عبر الخاص على @hadeel.k_beauty</p>
+        </div>
+    </section>
+
+    <footer class="footer site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section footer-brand">
+                    <h3>Hadeel SkinCare</h3>
+                    <p class="footer-brand-text">متجر متخصص في منتجات العناية بالبشرة الطبيعية المصنوعة يدوياً بعناية وحب.</p>
+                    <div class="footer-social">
+                        <a href="https://instagram.com/hadeel.k_beauty" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="إنستغرام"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>روابط سريعة</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html"><i class="fas fa-home"></i> الرئيسية</a></li>
+                        <li><a href="products.html"><i class="fas fa-shopping-bag"></i> المنتجات</a></li>
+                        <li><a href="about.html"><i class="fas fa-info-circle"></i> من نحن</a></li>
+                        <li><a href="cart.html"><i class="fas fa-shopping-cart"></i> سلة التسوق</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>اتصل بنا</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://instagram.com/hadeel.k_beauty" target="_blank" rel="noopener noreferrer" class="footer-contact-link"><i class="fab fa-instagram"></i> @hadeel.k_beauty</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="footer-copyright">© <span id="currentYear">2024</span> Hadeel SkinCare. جميع الحقوق محفوظة.</p>
+                <p class="footer-credit-line">تم التصميم بواسطة <a href="https://instagram.com/ayacode.1" target="_blank" rel="noopener noreferrer">AyaCode studio</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- زر العودة للأعلى -->
+    <button class="back-to-top" id="backToTop" aria-label="العودة إلى أعلى الصفحة">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="theme.js"></script>
+    <script src="telegram-config.js"></script>
+    <script src="telegram-notify.js"></script>
+    <script src="chatbot.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // تحديث سنة الفوتر
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+            
+            // إدارة القائمة للجوال
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const navLinks = document.getElementById('navLinks');
+            
+            mobileMenuBtn.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                this.innerHTML = navLinks.classList.contains('active') 
+                    ? '<i class="fas fa-times"></i>' 
+                    : '<i class="fas fa-bars"></i>';
+            });
+            
+            // إغلاق القائمة عند النقر على رابط
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                });
+            });
+
+            const cartBtnNav = document.querySelector('.cart-btn');
+            if (cartBtnNav) {
+                cartBtnNav.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                });
+            }
+            
+            // تأثير التمرير على الهيدر
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+            
+            // زر العودة للأعلى
+            const backToTopBtn = document.getElementById('backToTop');
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTopBtn.classList.add('show');
+                } else {
+                    backToTopBtn.classList.remove('show');
+                }
+            });
+            
+            backToTopBtn.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // تحديث عدد المنتجات في السلة
+            function updateCartCount() {
+                try {
+                    const cart = JSON.parse(localStorage.getItem('hadeelCart') || '[]');
+                    const total = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+                    document.getElementById('cartCount').textContent = total;
+                } catch (e) {
+                    console.error('Error updating cart count:', e);
+                }
+            }
+            
+            // معالجة أخطاء الصور
+            function handleImageError(imgElement) {
+                imgElement.style.display = 'none';
+                const placeholder = imgElement.nextElementSibling;
+                if (placeholder) {
+                    placeholder.style.display = 'flex';
+                }
+            }
+            
+            // جعل الدالة متاحة عالمياً لاستخدامها في onerror
+            window.handleImageError = handleImageError;
+            
+            // تحديث عدد السلة عند تحميل الصفحة
+            updateCartCount();
+            
+            // تحديث عدد السلة عند تغييرات التخزين (إذا كانت الصفحة مفتوحة في تبويب آخر)
+            window.addEventListener('storage', function(e) {
+                if (e.key === 'hadeelCart') {
+                    updateCartCount();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

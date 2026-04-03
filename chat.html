@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#1a2f4a">
+    <script>try{var t=localStorage.getItem('hadeel-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+    <meta name="description" content="Hadeel AI — إجابات سريعة عن التوصيل والدفع والطلب">
+    <title>Hadeel AI - Hadeel SkinCare</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@500;600;700&family=Tajawal:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="page-chat">
+    <a href="https://instagram.com/hadeel.k_beauty" class="instagram-side-float" target="_blank" rel="noopener noreferrer" aria-label="إنستغرام Hadeel SkinCare — @hadeel.k_beauty">
+        <i class="fab fa-instagram" aria-hidden="true"></i>
+    </a>
+    <header class="header" id="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-spa"></i>
+                    <div class="logo-text">
+                        <h1>Hadeel SkinCare</h1>
+                        <p>العناية الطبيعية ببشرتك</p>
+                    </div>
+                </a>
+                <div class="nav-links" id="navLinks">
+                    <a href="index.html" class="nav-link">الرئيسية</a>
+                    <a href="products.html" class="nav-link">المنتجات</a>
+                    <a href="about.html" class="nav-link">من نحن</a>
+                    <a href="cart.html" class="cart-btn">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>السلة</span>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </a>
+                </div>
+                <div class="navbar-end">
+                    <button type="button" class="theme-toggle" id="themeToggle" aria-label="تفعيل الوضع الداكن">
+                        <i class="fas fa-moon theme-toggle__icon theme-toggle__icon--moon" aria-hidden="true"></i>
+                        <i class="fas fa-sun theme-toggle__icon theme-toggle__icon--sun" aria-hidden="true"></i>
+                    </button>
+                    <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" aria-label="فتح القائمة">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-hero page-hero--compact">
+        <div class="container">
+            <span class="eyebrow">مساعدة ذكية</span>
+            <h1>Hadeel AI</h1>
+            <p>اسألي عن التحضير، التوصيل، الدفع، أو الطلب — أو تواصلي معنا على إنستغرام.</p>
+        </div>
+    </section>
+
+    <main class="chat-page-main">
+        <div class="container">
+            <div id="chatbot-page-root"></div>
+        </div>
+    </main>
+
+    <footer class="footer site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section footer-brand">
+                    <h3>Hadeel SkinCare</h3>
+                    <p class="footer-brand-text">متجر متخصص في منتجات العناية بالبشرة الطبيعية المصنوعة يدوياً بعناية وحب.</p>
+                    <div class="footer-social">
+                        <a href="https://instagram.com/hadeel.k_beauty" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="إنستغرام"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>روابط سريعة</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html"><i class="fas fa-home"></i> الرئيسية</a></li>
+                        <li><a href="products.html"><i class="fas fa-shopping-bag"></i> المنتجات</a></li>
+                        <li><a href="about.html"><i class="fas fa-info-circle"></i> من نحن</a></li>
+                        <li><a href="chat.html"><i class="fas fa-robot"></i> Hadeel AI</a></li>
+                        <li><a href="cart.html"><i class="fas fa-shopping-cart"></i> سلة التسوق</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>اتصل بنا</h3>
+                    <ul class="footer-links">
+                        <li><a href="https://instagram.com/hadeel.k_beauty" target="_blank" rel="noopener noreferrer" class="footer-contact-link"><i class="fab fa-instagram"></i> @hadeel.k_beauty</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="footer-copyright">© <span id="currentYear">2024</span> Hadeel SkinCare. جميع الحقوق محفوظة.</p>
+                <p class="footer-credit-line">تم التصميم بواسطة <a href="https://instagram.com/ayacode.1" target="_blank" rel="noopener noreferrer">AyaCode studio</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <button class="back-to-top" id="backToTop" aria-label="العودة إلى أعلى الصفحة"><i class="fas fa-arrow-up"></i></button>
+
+    <script src="theme.js"></script>
+    <script src="telegram-config.js"></script>
+    <script src="telegram-notify.js"></script>
+    <script src="chatbot.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+            var mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            var navLinks = document.getElementById('navLinks');
+            mobileMenuBtn.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                this.innerHTML = navLinks.classList.contains('active') ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+            });
+            document.querySelectorAll('.nav-link').forEach(function(link) {
+                link.addEventListener('click', function() {
+                    navLinks.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                });
+            });
+            document.querySelectorAll('.cart-btn').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    navLinks.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                });
+            });
+            var header = document.getElementById('header');
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 50) header.classList.add('scrolled');
+                else header.classList.remove('scrolled');
+            });
+            var cart = JSON.parse(localStorage.getItem('hadeelCart') || '[]');
+            document.getElementById('cartCount').textContent = cart.reduce(function(s, i) { return s + (i.quantity || 1); }, 0);
+            var backToTopBtn = document.getElementById('backToTop');
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) backToTopBtn.classList.add('show');
+                else backToTopBtn.classList.remove('show');
+            });
+            backToTopBtn.addEventListener('click', function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
