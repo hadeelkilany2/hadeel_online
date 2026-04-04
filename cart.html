@@ -341,7 +341,7 @@
                                         <div class="payment-option-title">دفع نقدي</div>
                                     </div>
                                     <div class="payment-option-desc">
-                                        تدفعين المبلغ نقداً عند استلام الطلب. نستلم تفاصيل الطلب على بريدنا تلقائياً.
+                                        تدفعين المبلغ نقداً عند استلام الطلب. بعد التأكيد يُفتح واتساب برسالة فيها تفاصيل طلبك — اضغطي «إرسال» لإرسالها لنا.
                                     </div>
                                 </div>
                                 
@@ -438,7 +438,7 @@
                         `}
                         
                         <div class="cart-summary-trust">
-                            <p><i class="fas fa-info-circle" aria-hidden="true"></i> ${selectedPaymentMethod === 'cash' ? 'يُرسل الطلب إلى بريدنا مباشرة؛ الدفع عند التوصيل نقداً' : 'امسحي رمز بت وأكملي الدفع ثم أكدي الطلب'}</p>
+                            <p><i class="fas fa-info-circle" aria-hidden="true"></i> ${selectedPaymentMethod === 'cash' ? 'يُفتح واتساب بملخص الطلب؛ بعد «إرسال» نتواصل معكِ لتأكيد التوصيل والدفع نقداً' : 'امسحي رمز بت وأكملي الدفع ثم أكدي الطلب'}</p>
                             <p class="cart-summary-trust-sub"><i class="fas fa-shield-alt" aria-hidden="true"></i> معلوماتك محمية ولا نشاركها مع أحد</p>
                         </div>
                     </div>
@@ -591,21 +591,31 @@
                     paymentLabel: 'نقدي',
                     lines: lines
                 };
+                var waPhoneDigits = (window.HADEEL_WHATSAPP_ORDER && String(window.HADEEL_WHATSAPP_ORDER.phone || '').replace(/\D/g, '')) || '';
                 try {
                     sessionStorage.setItem('hadeelLastOrder', JSON.stringify(payload));
                 } catch (e) {}
                 if (typeof window.hadeelPostTelegram === 'function') {
                     window.hadeelPostTelegram('🛒 طلب جديد — نقدي\n\n' + message);
                 }
-                var waOk = typeof window.hadeelOpenOrderWhatsApp === 'function' && window.hadeelOpenOrderWhatsApp(message);
-                showNotification(
-                    waOk ? 'افتحي واتساب واضغطي «إرسال» لتأكيد الطلب' : 'عبّي رقم واتساب المتجر في telegram-config.js ثم أعيدي المحاولة',
-                    waOk ? 'success' : 'warning'
-                );
+                if (!waPhoneDigits) {
+                    showNotification('رقم واتساب غير مضبوط في telegram-config.js — راجعي صفحة التأكيد أو إنستغرام', 'warning');
+                    setTimeout(function () {
+                        window.location.href = 'order-confirmation.html';
+                    }, 500);
+                    return;
+                }
                 localStorage.removeItem('hadeelCart');
+                try {
+                    updateCartCount();
+                } catch (e) {}
+                if (typeof window.hadeelOpenOrderWhatsApp === 'function') {
+                    window.hadeelOpenOrderWhatsApp(message);
+                }
+                showNotification('افتحي واتساب واضغطي «إرسال»؛ يمكنك إعادة فتح الرابط من صفحة التأكيد', 'success');
                 setTimeout(function () {
                     window.location.href = 'order-confirmation.html';
-                }, waOk ? 500 : 0);
+                }, 900);
             }
             
             // إتمام الطلب عبر بت
@@ -684,18 +694,29 @@
                         if (typeof window.hadeelPostTelegram === 'function') {
                             window.hadeelPostTelegram('🛒 طلب جديد — بت\n\n' + mail.body);
                         }
-                        var waBit = typeof window.hadeelOpenOrderWhatsApp === 'function' && window.hadeelOpenOrderWhatsApp(mail.body);
-                        showNotification(
-                            waBit ? 'افتحي واتساب واضغطي «إرسال» لتأكيد الطلب' : 'عبّي رقم واتساب المتجر في telegram-config.js',
-                            waBit ? 'success' : 'warning'
-                        );
-                        localStorage.removeItem('pendingBitOrder');
-                        localStorage.removeItem('hadeelCart');
-                        setTimeout(function () {
-                            window.location.href = 'order-confirmation.html';
-                        }, waBit ? 500 : 0);
+                        var waBitDigits = (window.HADEEL_WHATSAPP_ORDER && String(window.HADEEL_WHATSAPP_ORDER.phone || '').replace(/\D/g, '')) || '';
+                        if (!waBitDigits) {
+                            showNotification('رقم واتساب غير مضبوط في telegram-config.js', 'warning');
+                            localStorage.removeItem('pendingBitOrder');
+                            setTimeout(function () {
+                                window.location.href = 'order-confirmation.html';
+                            }, 500);
+                        } else {
+                            localStorage.removeItem('pendingBitOrder');
+                            localStorage.removeItem('hadeelCart');
+                            try {
+                                updateCartCount();
+                            } catch (e) {}
+                            if (typeof window.hadeelOpenOrderWhatsApp === 'function') {
+                                window.hadeelOpenOrderWhatsApp(mail.body);
+                            }
+                            showNotification('افتحي واتساب وأرسلي تفاصيل الطلب؛ يمكنك إعادة فتح الرابط من صفحة التأكيد', 'success');
+                            setTimeout(function () {
+                                window.location.href = 'order-confirmation.html';
+                            }, 900);
+                        }
                     }
-                }, 3000);
+                }, 1500);
             }
             
             function buildBitMail(orderData) {
