@@ -162,6 +162,11 @@
         <span id="notificationText"></span>
     </div>
 
+    <a href="cart.html" id="floatingCartLink" class="floating-cart-link" hidden>
+        <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+        <span id="floatingCartText">عرض السلة</span>
+    </a>
+
     <div id="productModal" class="product-modal" role="dialog" aria-modal="true" aria-labelledby="productModalTitle" aria-hidden="true" hidden>
         <div class="product-modal__backdrop" id="productModalBackdrop" tabindex="-1"></div>
         <div class="product-modal__panel">
@@ -194,7 +199,8 @@
             { id: 5, name: 'مقشر نيلة', category: 'scrubs', description: 'تقشير وترطيب برائحة النيلة', details: 'مزيج تقشير وترطيب مع رائحة النيلة المميزة. يفيد بشرة الجسم ويمنحها نعومة بعد الاستخدام المنتظم.', price: 60, image: './images/product-nila-scrub.png' },
             { id: 6, name: 'زبدة برائحة سويت', category: 'butters', description: 'ترطيب عميق وطويل الأمد', details: 'زبدة جسم بتركيبة غنية للترطيب العميق، برائحة حلوة مريحة. مناسبة بعد الاستحمام مباشرة على بشرة شبه جافة.', price: 40, image: './images/product-sweet-butter.png' },
             { id: 7, name: 'كعب الغزال', category: 'care', description: 'عناية بالقدمين وتنعيمها', details: 'منتج عناية بالقدمين يساعد على تنعيم المناطق الخشنة. يُطبّق على القدمين مع تدليك خفيف حسب الحاجة.', price: 30, image: './images/product-kaab-el-ghazal.png' },
-            { id: 8, name: 'صابونة نيلة', category: 'soaps', description: 'تفتيح البشرة وتنعيمها', details: 'صابونة غنية بمكونات تدعم إشراق البشرة ونعومتها. للوجه أو الجسم حسب التعليمات؛ يُفضّل ترطيب البشرة بعدها.', price: 70, image: './images/product-nila-soap.png' }
+            { id: 8, name: 'صابونة نيلة', category: 'soaps', description: 'تفتيح البشرة وتنعيمها', details: 'صابونة غنية بمكونات تدعم إشراق البشرة ونعومتها. للوجه أو الجسم حسب التعليمات؛ يُفضّل ترطيب البشرة بعدها.', price: 70, image: './images/product-nila-soap.png' },
+            { id: 9, name: 'ماسك العناية بك', category: 'care', description: 'ماسك عناية لبشرة نقية ونضرة بإشراقة طبيعية', details: 'ماسك عناية يساعد على منح البشرة مظهراً أنعم وأكثر نضارة. يوضع على بشرة نظيفة حسب الحاجة ثم يُشطف بلطف، مع ترطيب البشرة بعد الاستخدام.', price: 60, image: './images/product-mask-care.png' }
         ];
 
         const productsGrid = document.getElementById('productsGrid');
@@ -215,6 +221,10 @@
         function updateCartCount() {
             const total = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
             cartCount.textContent = total;
+            const floatingCartLink = document.getElementById('floatingCartLink');
+            const floatingCartText = document.getElementById('floatingCartText');
+            if (floatingCartLink) floatingCartLink.hidden = total === 0;
+            if (floatingCartText) floatingCartText.textContent = total ? 'عرض السلة (' + total + ')' : 'عرض السلة';
         }
 
         function addToCart(product, quantity) {
@@ -263,6 +273,11 @@
             qtyEl.textContent = '1';
         }
 
+        function buyNowFromCard(button) {
+            addToCartFromCard(button);
+            window.location.href = 'cart.html';
+        }
+
         var carouselTimer = null;
         var carouselIndex = 0;
         var CAROUSEL_AUTO_MS = 5000;
@@ -289,6 +304,8 @@
                 '</div>' +
                 '<button type="button" class="add-to-cart" data-add="' + product.id + '">' +
                 '<i class="fas fa-cart-plus"></i> أضف للسلة</button>' +
+                '<button type="button" class="buy-now" data-buy="' + product.id + '">' +
+                '<i class="fas fa-bag-shopping"></i> شراء الآن</button>' +
                 '</div></div>';
             card.addEventListener('click', function(e) {
                 if (e.target.closest('.product-actions')) return;
@@ -305,6 +322,10 @@
             card.querySelector('[data-add="' + product.id + '"]').addEventListener('click', function(e) {
                 e.stopPropagation();
                 addToCartFromCard(this);
+            });
+            card.querySelector('[data-buy="' + product.id + '"]').addEventListener('click', function(e) {
+                e.stopPropagation();
+                buyNowFromCard(this);
             });
             return card;
         }
@@ -514,6 +535,8 @@
             if (carouselNext) carouselNext.addEventListener('click', function() { userCarouselStep(1); });
             applyFiltersBtn.addEventListener('click', applyFilters);
             resetFiltersBtn.addEventListener('click', resetFilters);
+            categorySelect.addEventListener('change', applyFilters);
+            sortSelect.addEventListener('change', applyFilters);
             searchInput.addEventListener('input', () => {
                 clearTimeout(searchInput.timeout);
                 searchInput.timeout = setTimeout(applyFilters, 300);

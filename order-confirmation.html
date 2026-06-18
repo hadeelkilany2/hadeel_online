@@ -208,7 +208,7 @@
             var bodyText = String(data.mailBody || '').slice(0, 3800);
             if (d && bodyText) {
                 waBtn.href = 'https://wa.me/' + d + '?text=' + encodeURIComponent(bodyText);
-                waBtn.target = '_blank';
+                waBtn.removeAttribute('target');
                 hintEl.textContent = 'بعد ما تضغطي إرسال في واتساب، سنتواصل معكِ لتأكيد التوصيل.';
             } else {
                 waBtn.href = '#';

@@ -67,9 +67,9 @@
                     <i class="fas fa-shopping-bag"></i>
                 </div>
                 <div class="cart-head-text">
-                    <p class="cart-head-eyebrow">إتمام الطلب</p>
+                    <p class="cart-head-eyebrow">طلب سريع</p>
                     <h1 class="cart-head-title">سلة التسوق</h1>
-                    <p class="cart-head-desc">راجعي المنتجات، عبّي بيانات التوصيل، واختاري طريقة الدفع بأمان.</p>
+                    <p class="cart-head-desc">راجعي طلبك، اكتبي بيانات التوصيل، ثم اضغطي تأكيد الطلب.</p>
                 </div>
             </header>
 
@@ -162,11 +162,56 @@
             
             // متغيرات الدفع
             let selectedPaymentMethod = 'cash';
+
+            function escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text == null ? '' : String(text);
+                return div.innerHTML;
+            }
+
+            function escapeAttr(text) {
+                return escapeHtml(text).replace(/"/g, '&quot;');
+            }
+
+            function getCustomerFormData() {
+                return {
+                    name: document.getElementById('customerName')?.value.trim() || '',
+                    phone: document.getElementById('customerPhone')?.value.trim() || '',
+                    address: document.getElementById('customerAddress')?.value.trim() || '',
+                    notes: document.getElementById('customerNotes')?.value.trim() || ''
+                };
+            }
+
+            function getMissingCheckoutFields() {
+                return getMissingCheckoutItems().map(function(item) { return item.label; });
+            }
+
+            function getMissingCheckoutItems() {
+                const data = getCustomerFormData();
+                const missing = [];
+                if (!data.name) missing.push({ label: 'الاسم', selector: '#customerName' });
+                if (!data.phone) missing.push({ label: 'الهاتف', selector: '#customerPhone' });
+                if (!data.address) missing.push({ label: 'العنوان', selector: '#customerAddress' });
+                if (!selectedRegion) missing.push({ label: 'المنطقة', selector: '.region-select' });
+                return missing;
+            }
+
+            function focusFirstMissingField() {
+                const first = getMissingCheckoutItems()[0];
+                if (!first) return;
+                const target = document.querySelector(first.selector);
+                if (!target) return;
+                target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                if (typeof target.focus === 'function') {
+                    setTimeout(function() { target.focus(); }, 350);
+                }
+            }
             
             // عرض محتويات السلة
             function displayCart() {
                 const cartContent = document.querySelector('.cart-content');
                 const cart = JSON.parse(localStorage.getItem('hadeelCart') || '[]');
+                const formData = getCustomerFormData();
                 
                 if (cart.length === 0) {
                     cartContent.innerHTML = `
@@ -234,6 +279,11 @@
                 // حساب الشحن
                 const shippingCost = selectedRegion ? shippingPrices[selectedRegion] : 0;
                 const total = subtotal + shippingCost;
+                const missingFields = getMissingCheckoutFields();
+                const isReady = missingFields.length === 0;
+                const nextStepText = isReady
+                    ? 'كل شيء جاهز'
+                    : 'أكملي: ' + missingFields.join('، ');
                 
                 cartContent.innerHTML = `
                     <div class="cart-main-stack">
@@ -255,11 +305,43 @@
                             </table>
                             </div>
                         </div>
+
+                        <div class="order-guide-card">
+                            <div class="order-guide-video">
+                                <video controls playsinline preload="metadata" poster="images/hero-main.png"
+                                       onerror="this.closest('.order-guide-video').classList.add('order-guide-video--fallback')">
+                                    <source src="videos/how-to-order.mp4" type="video/mp4"
+                                            onerror="this.closest('.order-guide-video').classList.add('order-guide-video--fallback')">
+                                </video>
+                                <div class="order-guide-video__fallback">
+                                    <i class="fas fa-play-circle" aria-hidden="true"></i>
+                                    <span>فيديو طريقة الطلب</span>
+                                </div>
+                            </div>
+                            <div class="order-guide-body">
+                                <span class="order-guide-eyebrow">طريقة الطلب</span>
+                                <h3>كيف تكمّلي الطلب؟</h3>
+                                <div class="order-guide-steps">
+                                    <div class="order-guide-step">
+                                        <span>1</span>
+                                        <p>راجعي المنتجات والكمية.</p>
+                                    </div>
+                                    <div class="order-guide-step">
+                                        <span>2</span>
+                                        <p>اكتبي الاسم، الهاتف، العنوان والمنطقة.</p>
+                                    </div>
+                                    <div class="order-guide-step">
+                                        <span>3</span>
+                                        <p>اختاري نقدي أو بت، ثم اضغطي تأكيد الطلب.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         
                         <div class="customer-info-section">
                             <h3 class="cart-form-title">
-                                <i class="fas fa-user-circle"></i>
-                                معلومات العميل
+                                <i class="fas fa-truck-fast"></i>
+                                بيانات التوصيل والدفع
                             </h3>
                             
                             <div class="form-grid">
@@ -268,7 +350,7 @@
                                         <span class="required-label">*</span>الاسم الكامل
                                     </label>
                                     <input type="text" id="customerName" class="input-field required" 
-                                           placeholder="أدخل اسمك الكامل" required>
+                                           placeholder="الاسم الكامل" autocomplete="name" value="${escapeAttr(formData.name)}" required>
                                 </div>
                                 
                                 <div class="form-group">
@@ -276,7 +358,7 @@
                                         <span class="required-label">*</span>رقم الهاتف
                                     </label>
                                     <input type="tel" id="customerPhone" class="input-field required" 
-                                           placeholder="مثال: 0591234567" required>
+                                           placeholder="رقم الهاتف" autocomplete="tel" inputmode="tel" value="${escapeAttr(formData.phone)}" required>
                                 </div>
                                 
                                 <div class="form-group full-width">
@@ -284,120 +366,92 @@
                                         <span class="required-label">*</span>العنوان بالتفصيل
                                     </label>
                                     <textarea id="customerAddress" class="input-field required" 
-                                              rows="3" placeholder="الشارع، المدينة، المنطقة..." required></textarea>
+                                              rows="2" placeholder="المدينة، الشارع، رقم البيت أو علامة واضحة" autocomplete="street-address" required>${escapeHtml(formData.address)}</textarea>
                                 </div>
                                 
                                 <div class="form-group full-width">
                                     <label>
-                                        <span class="required-label">*</span>اختر المنطقة
+                                        <span class="required-label">*</span>منطقة التوصيل
                                     </label>
                                     <div class="region-select">
-                                        <div class="region-option ${selectedRegion === 'south' ? 'selected' : ''}" 
+                                        <button type="button" class="region-option ${selectedRegion === 'south' ? 'selected' : ''}" 
                                              onclick="selectRegion('south')">
                                             <i class="fas fa-map-marker-alt"></i>
                                             <div>جنوب</div>
                                             <span class="region-price">${shippingPrices.south} ₪</span>
-                                        </div>
-                                        <div class="region-option ${selectedRegion === 'north' ? 'selected' : ''}" 
+                                        </button>
+                                        <button type="button" class="region-option ${selectedRegion === 'north' ? 'selected' : ''}" 
                                              onclick="selectRegion('north')">
                                             <i class="fas fa-map-marker-alt"></i>
                                             <div>شمال</div>
                                             <span class="region-price">${shippingPrices.north} ₪</span>
-                                        </div>
-                                        <div class="region-option ${selectedRegion === 'other' ? 'selected' : ''}" 
+                                        </button>
+                                        <button type="button" class="region-option ${selectedRegion === 'other' ? 'selected' : ''}" 
                                              onclick="selectRegion('other')">
                                             <i class="fas fa-map-marker-alt"></i>
                                             <div>وادي عاره</div>
                                             <span class="region-price">${shippingPrices.other} ₪</span>
-                                        </div>
-                                        <div class="region-option ${selectedRegion === 'baka' ? 'selected' : ''}" 
+                                        </button>
+                                        <button type="button" class="region-option ${selectedRegion === 'baka' ? 'selected' : ''}" 
                                              onclick="selectRegion('baka')">
                                             <i class="fas fa-map-marker-alt"></i>
                                             <div>باقة أو جت</div>
                                             <span class="region-price">${shippingPrices.baka} ₪</span>
-                                        </div>
+                                        </button>
                                     </div>
                                 </div>
                                 
                                 <div class="form-group full-width">
-                                    <label for="customerNotes">ملاحظات إضافية (اختياري)</label>
+                                    <label for="customerNotes">ملاحظات (اختياري)</label>
                                     <textarea id="customerNotes" class="input-field" 
-                                              rows="2" placeholder="ملاحظات خاصة بالطلب..."></textarea>
+                                              rows="2" placeholder="أي ملاحظة للطلب">${escapeHtml(formData.notes)}</textarea>
                                 </div>
                             </div>
-                        </div>
-                        
-                        <div class="payment-section">
-                            <h3 class="cart-form-title">
-                                <i class="fas fa-credit-card"></i>
-                                طريقة الدفع
-                            </h3>
                             
                             <div class="payment-options">
-                                <div class="payment-option ${selectedPaymentMethod === 'cash' ? 'selected' : ''}" 
+                                <button type="button" class="payment-option ${selectedPaymentMethod === 'cash' ? 'selected' : ''}" 
                                      onclick="selectPaymentMethod('cash')">
                                     <div class="payment-option-header">
                                         <i class="fas fa-money-bill-wave"></i>
                                         <div class="payment-option-title">دفع نقدي</div>
                                     </div>
                                     <div class="payment-option-desc">
-                                        تدفعين المبلغ نقداً عند استلام الطلب. بعد التأكيد يُفتح واتساب برسالة فيها تفاصيل طلبك — اضغطي «إرسال» لإرسالها لنا.
+                                        الدفع عند الاستلام
                                     </div>
-                                </div>
+                                </button>
                                 
-                                <div class="payment-option ${selectedPaymentMethod === 'bit' ? 'selected' : ''}" 
+                                <button type="button" class="payment-option ${selectedPaymentMethod === 'bit' ? 'selected' : ''}" 
                                      onclick="selectPaymentMethod('bit')">
                                     <div class="payment-option-header">
                                         <i class="fas fa-qrcode"></i>
                                         <div class="payment-option-title">دفع عبر بت</div>
                                     </div>
                                     <div class="payment-option-desc">
-                                        ادفعي الآن عبر تطبيق بت بمسح رمز QR أدناه
+                                        امسحي الرمز وادفعي
                                     </div>
-                                    
-                                    <div class="bit-info">
-                                        <h4><i class="fas fa-info-circle"></i> حول الدفع عبر بت</h4>
-                                        <ul>
-                                            <li><i class="fas fa-check"></i> دفع آمن 100%</li>
-                                            <li><i class="fas fa-check"></i> تحويل فوري</li>
-                                            <li><i class="fas fa-check"></i> إشعار فوري بالدفع</li>
-                                            <li><i class="fas fa-check"></i> لا حاجة لمشاركة معلومات البطاقة</li>
-                                        </ul>
+                                </button>
+                            </div>
+
+                            ${selectedPaymentMethod === 'bit' ? `
+                                <div class="qr-container show" id="bitQrContainer">
+                                    <div class="qr-code">
+                                        <img src="images/bit-qr-code.jpeg" 
+                                             alt="رمز QR للدفع عبر بت"
+                                             onerror="this.onerror=null; this.src='images/bit-qr-code.jpeg'; this.alt='رمز QR للدفع عبر بت'">
                                     </div>
-                                    
-                                    <div class="payment-instructions">
-                                        <strong>كيفية الدفع عبر بت:</strong>
-                                        <ol class="payment-steps-list">
-                                            <li>افتح تطبيق بت على هاتفك</li>
-                                            <li>اضغط على "الماسح الضوئي" أو "Scan"</li>
-                                            <li>امسح رمز QR الموجود أدناه</li>
-                                            <li>أدخل المبلغ المطلوب وأكمل الدفع</li>
-                                            <li>ستصلك رسالة تأكيد فوراً</li>
-                                        </ol>
-                                    </div>
-                                    
-                                    <div class="qr-container ${selectedPaymentMethod === 'bit' ? 'show' : ''}" id="bitQrContainer">
-                                        <div class="qr-code">
-                                            <!-- === صورة QR Code للدفع عبر بت === -->
-                                            <img src="images/bit-qr-code.jpeg" 
-                                                 alt="رمز QR للدفع عبر بت"
-                                                 onerror="this.onerror=null; this.src='images/bit-qr-code.jpeg'; this.alt='رمز QR للدفع عبر بت'">
-                                        </div>
-                                        <div class="qr-footer">
-                                            <p class="qr-amount-line">المبلغ: <span class="qr-amount-value">${total} ₪</span></p>
-                                            <p class="qr-hint-line">امسح الرمز وادفع عبر تطبيق بت</p>
-                                            <div class="qr-safe-badge"><i class="fas fa-shield-alt" aria-hidden="true"></i> آمن 100%</div>
-                                        </div>
+                                    <div class="qr-footer">
+                                        <p class="qr-amount-line">المبلغ: <span class="qr-amount-value">${total} ₪</span></p>
+                                        <p class="qr-hint-line">افتحي بت، امسحي الرمز، وبعد الدفع اضغطي تأكيد الطلب.</p>
                                     </div>
                                 </div>
-                            </div>
+                            ` : ''}
                         </div>
                     </div>
                     
                     <div class="cart-summary">
                         <h3 class="cart-form-title">
                             <i class="fas fa-receipt"></i>
-                            ملخص الطلب
+                            ملخص سريع
                         </h3>
                         
                         <div class="summary-row">
@@ -406,7 +460,7 @@
                         </div>
                         
                         <div class="summary-row">
-                            <span>تكاليف الشحن</span>
+                            <span>الشحن</span>
                             <span id="shippingCost">${shippingCost} ₪</span>
                         </div>
                         
@@ -415,31 +469,35 @@
                                 <i class="fas fa-info-circle shipping-note-icon" aria-hidden="true"></i>
                                 <div class="shipping-note-body">
                                     <strong>الشحن لـ: ${getRegionName(selectedRegion)}</strong>
-                                    <div class="shipping-note-detail">سيتم توصيل الطلب خلال 2-3 أيام عمل</div>
+                                    <div class="shipping-note-detail">التوصيل خلال 2-3 أيام عمل</div>
                                 </div>
                             </div>
                         ` : ''}
                         
                         <div class="summary-row total">
-                            <span>الإجمالي النهائي</span>
+                            <span>الإجمالي</span>
                             <span id="totalPrice">${total} ₪</span>
+                        </div>
+
+                        <div class="summary-next-step ${isReady ? 'summary-next-step--ready' : ''}">
+                            <i class="fas ${isReady ? 'fa-check-circle' : 'fa-list-check'}" aria-hidden="true"></i>
+                            <span>${nextStepText}</span>
                         </div>
                         
                         ${selectedPaymentMethod === 'cash' ? `
-                            <button type="button" class="checkout-btn" onclick="checkoutViaCash()" id="checkoutBtn" ${selectedRegion ? '' : 'disabled'}>
+                            <button type="button" class="checkout-btn" onclick="startCheckout('cash')" id="checkoutBtn">
                                 <i class="fas fa-check-circle"></i>
-                                تأكيد الطلب — نقدي
+                                تأكيد الطلب
                             </button>
                         ` : `
-                            <button type="button" class="checkout-btn checkout-btn--bit" onclick="checkoutViaBit()" id="checkoutBtn">
+                            <button type="button" class="checkout-btn checkout-btn--bit" onclick="startCheckout('bit')" id="checkoutBtn">
                                 <i class="fas fa-qrcode" aria-hidden="true"></i>
-                                تأكيد الطلب — بت
+                                تأكيد بعد الدفع ببت
                             </button>
                         `}
                         
                         <div class="cart-summary-trust">
-                            <p><i class="fas fa-info-circle" aria-hidden="true"></i> ${selectedPaymentMethod === 'cash' ? 'يُفتح واتساب بملخص الطلب؛ بعد «إرسال» نتواصل معكِ لتأكيد التوصيل والدفع نقداً' : 'امسحي رمز بت وأكملي الدفع ثم أكدي الطلب'}</p>
-                            <p class="cart-summary-trust-sub"><i class="fas fa-shield-alt" aria-hidden="true"></i> معلوماتك محمية ولا نشاركها مع أحد</p>
+                            <p><i class="fas fa-info-circle" aria-hidden="true"></i> ${selectedPaymentMethod === 'cash' ? 'سيفتح واتساب مع ملخص جاهز للإرسال' : 'بعد الدفع ببت اضغطي الزر لإرسال الطلب'}</p>
                         </div>
                     </div>
                 `;
@@ -460,6 +518,19 @@
                 updateCheckoutButton();
                 showNotification(method === 'cash' ? 'تم اختيار الدفع نقدي' : 'تم اختيار الدفع عبر بت', 'success');
             }
+
+            window.startCheckout = function(method) {
+                selectedPaymentMethod = method;
+                const missing = getMissingCheckoutFields();
+                if (missing.length) {
+                    showNotification('أكملي: ' + missing.join('، '), 'warning');
+                    focusFirstMissingField();
+                    updateCheckoutButton();
+                    return;
+                }
+                if (method === 'bit') window.checkoutViaBit();
+                else window.checkoutViaCash();
+            }
             
             // الحصول على اسم المنطقة - تمت إضافة باقة أو جت
             function getRegionName(region) {
@@ -475,21 +546,29 @@
             // تحديث زر الإتمام
             function updateCheckoutButton() {
                 const btn = document.getElementById('checkoutBtn');
+                const missing = getMissingCheckoutFields();
+                const isValid = missing.length === 0;
                 if (btn) {
-                    const isValid = validateForm();
-                    btn.disabled = !isValid;
+                    btn.classList.toggle('checkout-btn--needs-info', !isValid);
+                    btn.title = isValid ? '' : 'أكملي: ' + missing.join('، ');
+                }
+                const nextStep = document.querySelector('.summary-next-step');
+                if (nextStep) {
+                    nextStep.classList.toggle('summary-next-step--ready', isValid);
+                    const icon = nextStep.querySelector('i');
+                    const text = nextStep.querySelector('span');
+                    if (icon) {
+                        icon.className = 'fas ' + (isValid ? 'fa-check-circle' : 'fa-list-check');
+                    }
+                    if (text) {
+                        text.textContent = isValid ? 'كل شيء جاهز' : 'أكملي: ' + missing.join('، ');
+                    }
                 }
             }
             
             // التحقق من صحة النموذج
             function validateForm() {
-                if (!selectedRegion) return false;
-                
-                const name = document.getElementById('customerName')?.value.trim();
-                const phone = document.getElementById('customerPhone')?.value.trim();
-                const address = document.getElementById('customerAddress')?.value.trim();
-                
-                return name && phone && address;
+                return getMissingCheckoutFields().length === 0;
             }
             
             // تحديث الكمية
@@ -612,10 +691,7 @@
                 if (typeof window.hadeelOpenOrderWhatsApp === 'function') {
                     window.hadeelOpenOrderWhatsApp(message);
                 }
-                showNotification('افتحي واتساب واضغطي «إرسال»؛ يمكنك إعادة فتح الرابط من صفحة التأكيد', 'success');
-                setTimeout(function () {
-                    window.location.href = 'order-confirmation.html';
-                }, 900);
+                showNotification('سيفتح واتساب الآن. اضغطي «إرسال» حتى يصل الطلب', 'success');
             }
             
             // إتمام الطلب عبر بت
@@ -659,64 +735,47 @@
                     timestamp: new Date().toISOString()
                 };
                 
-                localStorage.setItem('pendingBitOrder', JSON.stringify(orderData));
-                
-                // إظهار إشعار تعليمات
-                showNotification('املأ بياناتك ثم امسح رمز QR للدفع عبر بت', 'success');
-                
-                // تأكيد وهمي للدفع (في الواقع سيكون هناك استعلام من الخادم)
-                setTimeout(() => {
-                    const confirmPayment = confirm('هل قمت بالدفع عبر تطبيق بت؟\n\nإذا نعم، سنتصل بك لتأكيد الطلب.\nإذا لا، يمكنك إعادة المحاولة.');
-                    
-                    if (confirmPayment) {
-                        const mail = buildBitMail(orderData);
-                        const lines = orderData.cart.map(function(item) {
-                            return {
-                                name: item.name,
-                                quantity: item.quantity,
-                                lineTotal: item.price * item.quantity
-                            };
-                        });
-                        const payload = {
-                            type: 'bit',
-                            mailSubject: mail.subject,
-                            mailBody: mail.body,
-                            customerName: orderData.customerName,
-                            customerPhone: orderData.customerPhone,
-                            total: orderData.total,
-                            regionName: orderData.regionName,
-                            paymentLabel: 'بت',
-                            lines: lines
-                        };
-                        try {
-                            sessionStorage.setItem('hadeelLastOrder', JSON.stringify(payload));
-                        } catch (e) {}
-                        if (typeof window.hadeelPostTelegram === 'function') {
-                            window.hadeelPostTelegram('🛒 طلب جديد — بت\n\n' + mail.body);
-                        }
-                        var waBitDigits = (window.HADEEL_WHATSAPP_ORDER && String(window.HADEEL_WHATSAPP_ORDER.phone || '').replace(/\D/g, '')) || '';
-                        if (!waBitDigits) {
-                            showNotification('رقم واتساب غير مضبوط في telegram-config.js', 'warning');
-                            localStorage.removeItem('pendingBitOrder');
-                            setTimeout(function () {
-                                window.location.href = 'order-confirmation.html';
-                            }, 500);
-                        } else {
-                            localStorage.removeItem('pendingBitOrder');
-                            localStorage.removeItem('hadeelCart');
-                            try {
-                                updateCartCount();
-                            } catch (e) {}
-                            if (typeof window.hadeelOpenOrderWhatsApp === 'function') {
-                                window.hadeelOpenOrderWhatsApp(mail.body);
-                            }
-                            showNotification('افتحي واتساب وأرسلي تفاصيل الطلب؛ يمكنك إعادة فتح الرابط من صفحة التأكيد', 'success');
-                            setTimeout(function () {
-                                window.location.href = 'order-confirmation.html';
-                            }, 900);
-                        }
+                const mail = buildBitMail(orderData);
+                const lines = orderData.cart.map(function(item) {
+                    return {
+                        name: item.name,
+                        quantity: item.quantity,
+                        lineTotal: item.price * item.quantity
+                    };
+                });
+                const payload = {
+                    type: 'bit',
+                    mailSubject: mail.subject,
+                    mailBody: mail.body,
+                    customerName: orderData.customerName,
+                    customerPhone: orderData.customerPhone,
+                    total: orderData.total,
+                    regionName: orderData.regionName,
+                    paymentLabel: 'بت',
+                    lines: lines
+                };
+                try {
+                    sessionStorage.setItem('hadeelLastOrder', JSON.stringify(payload));
+                } catch (e) {}
+                if (typeof window.hadeelPostTelegram === 'function') {
+                    window.hadeelPostTelegram('🛒 طلب جديد — بت\n\n' + mail.body);
+                }
+                var waBitDigits = (window.HADEEL_WHATSAPP_ORDER && String(window.HADEEL_WHATSAPP_ORDER.phone || '').replace(/\D/g, '')) || '';
+                if (!waBitDigits) {
+                    showNotification('رقم واتساب غير مضبوط في telegram-config.js', 'warning');
+                    setTimeout(function () {
+                        window.location.href = 'order-confirmation.html';
+                    }, 500);
+                } else {
+                    localStorage.removeItem('hadeelCart');
+                    try {
+                        updateCartCount();
+                    } catch (e) {}
+                    if (typeof window.hadeelOpenOrderWhatsApp === 'function') {
+                        window.hadeelOpenOrderWhatsApp(mail.body);
                     }
-                }, 1500);
+                    showNotification('سيفتح واتساب الآن. اضغطي «إرسال» حتى يصل الطلب', 'success');
+                }
             }
             
             function buildBitMail(orderData) {
