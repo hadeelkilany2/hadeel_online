@@ -6,3 +6,8 @@
   from = "/api/chat-to-telegram"
   to = "/.netlify/functions/chat-to-telegram"
   status = 200
+
+[[redirects]]
+  from = "/api/telegram-webhook"
+  to = "/.netlify/functions/telegram-webhook"
+  status = 200
