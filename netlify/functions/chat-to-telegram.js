@@ -2,7 +2,7 @@
  * إرسال من الموقع إلى تيليجرام: أسئلة الشات + تفاصيل الطلبات.
  *
  * Netlify → Environment variables:
- *   TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID
+ *   TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_IDS
  *   NOTIFY_SECRET (اختياري) — نفسه في telegram-config.js
  */
 
@@ -46,8 +46,11 @@ exports.handler = async function (event) {
     if (text.length > MAX_IN) text = text.slice(0, MAX_IN);
 
     var token = process.env.TELEGRAM_BOT_TOKEN;
-    var chatId = process.env.TELEGRAM_CHAT_ID;
-    if (!token || !chatId) {
+    var chatIds = String(process.env.TELEGRAM_CHAT_IDS || '')
+        .split(',')
+        .map(function (id) { return id.trim(); })
+        .filter(Boolean);
+    if (!token || !chatIds.length) {
         return { statusCode: 500, headers: cors, body: JSON.stringify({ ok: false, error: 'missing_env' }) };
     }
 
@@ -59,16 +62,18 @@ exports.handler = async function (event) {
 
     for (var p = 0; p < parts.length; p++) {
         var chunk = parts.length > 1 ? '(' + (p + 1) + '/' + parts.length + ')\n' + parts[p] : parts[p];
-        var res = await fetch(url, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ chat_id: chatId, text: chunk }),
-        });
-        var data = await res.json().catch(function () {
-            return {};
-        });
-        if (!res.ok || !data.ok) {
-            return { statusCode: 502, headers: cors, body: JSON.stringify({ ok: false }) };
+        for (var c = 0; c < chatIds.length; c++) {
+            var res = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ chat_id: chatIds[c], text: chunk }),
+            });
+            var data = await res.json().catch(function () {
+                return {};
+            });
+            if (!res.ok || !data.ok) {
+                return { statusCode: 502, headers: cors, body: JSON.stringify({ ok: false }) };
+            }
         }
     }
 

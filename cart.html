@@ -114,7 +114,6 @@
 
     <script src="theme.js"></script>
     <script src="telegram-config.js"></script>
-    <script src="whatsapp-order.js"></script>
     <script src="telegram-notify.js"></script>
     <script src="chatbot.js"></script>
     <script>
@@ -497,7 +496,7 @@
                         `}
                         
                         <div class="cart-summary-trust">
-                            <p><i class="fas fa-info-circle" aria-hidden="true"></i> ${selectedPaymentMethod === 'cash' ? 'سيفتح واتساب مع ملخص جاهز للإرسال' : 'بعد الدفع ببت اضغطي الزر لإرسال الطلب'}</p>
+                            <p><i class="fas fa-info-circle" aria-hidden="true"></i> ${selectedPaymentMethod === 'cash' ? 'سيصل الطلب مباشرة على تلجرام' : 'بعد الدفع ببت اضغطي الزر لإرسال الطلب على تلجرام'}</p>
                         </div>
                     </div>
                 `;
@@ -670,28 +669,27 @@
                     paymentLabel: 'نقدي',
                     lines: lines
                 };
-                var waPhoneDigits = (window.HADEEL_WHATSAPP_ORDER && String(window.HADEEL_WHATSAPP_ORDER.phone || '').replace(/\D/g, '')) || '';
                 try {
                     sessionStorage.setItem('hadeelLastOrder', JSON.stringify(payload));
                 } catch (e) {}
-                if (typeof window.hadeelPostTelegram === 'function') {
-                    window.hadeelPostTelegram('🛒 طلب جديد — نقدي\n\n' + message);
-                }
-                if (!waPhoneDigits) {
-                    showNotification('رقم واتساب غير مضبوط في telegram-config.js — راجعي صفحة التأكيد أو إنستغرام', 'warning');
-                    setTimeout(function () {
-                        window.location.href = 'order-confirmation.html';
-                    }, 500);
+                if (typeof window.hadeelPostTelegram !== 'function') {
+                    showNotification('إرسال تلجرام غير مضبوط. راجعي إعدادات الموقع', 'error');
                     return;
                 }
-                localStorage.removeItem('hadeelCart');
-                try {
-                    updateCartCount();
-                } catch (e) {}
-                if (typeof window.hadeelOpenOrderWhatsApp === 'function') {
-                    window.hadeelOpenOrderWhatsApp(message);
-                }
-                showNotification('سيفتح واتساب الآن. اضغطي «إرسال» حتى يصل الطلب', 'success');
+                window.hadeelPostTelegram('🛒 طلب جديد — نقدي\n\n' + message)
+                    .then(function () {
+                        localStorage.removeItem('hadeelCart');
+                        try {
+                            updateCartCount();
+                        } catch (e) {}
+                        showNotification('تم إرسال الطلب على تلجرام بنجاح', 'success');
+                        setTimeout(function () {
+                            window.location.href = 'order-confirmation.html';
+                        }, 500);
+                    })
+                    .catch(function () {
+                        showNotification('لم يصل الطلب إلى تلجرام. افحصي إعدادات Telegram API', 'error');
+                    });
             }
             
             // إتمام الطلب عبر بت
@@ -757,25 +755,24 @@
                 try {
                     sessionStorage.setItem('hadeelLastOrder', JSON.stringify(payload));
                 } catch (e) {}
-                if (typeof window.hadeelPostTelegram === 'function') {
-                    window.hadeelPostTelegram('🛒 طلب جديد — بت\n\n' + mail.body);
+                if (typeof window.hadeelPostTelegram !== 'function') {
+                    showNotification('إرسال تلجرام غير مضبوط. راجعي إعدادات الموقع', 'error');
+                    return;
                 }
-                var waBitDigits = (window.HADEEL_WHATSAPP_ORDER && String(window.HADEEL_WHATSAPP_ORDER.phone || '').replace(/\D/g, '')) || '';
-                if (!waBitDigits) {
-                    showNotification('رقم واتساب غير مضبوط في telegram-config.js', 'warning');
-                    setTimeout(function () {
-                        window.location.href = 'order-confirmation.html';
-                    }, 500);
-                } else {
-                    localStorage.removeItem('hadeelCart');
-                    try {
-                        updateCartCount();
-                    } catch (e) {}
-                    if (typeof window.hadeelOpenOrderWhatsApp === 'function') {
-                        window.hadeelOpenOrderWhatsApp(mail.body);
-                    }
-                    showNotification('سيفتح واتساب الآن. اضغطي «إرسال» حتى يصل الطلب', 'success');
-                }
+                window.hadeelPostTelegram('🛒 طلب جديد — بت\n\n' + mail.body)
+                    .then(function () {
+                        localStorage.removeItem('hadeelCart');
+                        try {
+                            updateCartCount();
+                        } catch (e) {}
+                        showNotification('تم إرسال الطلب على تلجرام بنجاح', 'success');
+                        setTimeout(function () {
+                            window.location.href = 'order-confirmation.html';
+                        }, 500);
+                    })
+                    .catch(function () {
+                        showNotification('لم يصل الطلب إلى تلجرام. افحصي إعدادات Telegram API', 'error');
+                    });
             }
             
             function buildBitMail(orderData) {

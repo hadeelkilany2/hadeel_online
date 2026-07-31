@@ -64,7 +64,7 @@
                 <div class="order-confirm-icon order-confirm-icon--ok"><i class="fas fa-check-circle" aria-hidden="true"></i></div>
                 <p class="order-confirm-eyebrow" id="confirmTypeLabel">شكراً لطلبك</p>
                 <h1 id="confirmTitle">تم استلام طلبك</h1>
-                <p class="order-confirm-lead" id="confirmLead">راجعي الملخص أدناه ثم أرسلي الطلب عبر واتساب من الزر الأخضر.</p>
+                <p class="order-confirm-lead" id="confirmLead">تم إرسال الطلب مباشرة على تلجرام. راجعي الملخص أدناه.</p>
 
                 <div class="order-confirm-summary">
                     <div class="order-confirm-row"><span>الاسم</span><strong id="sumName">—</strong></div>
@@ -75,7 +75,6 @@
                 </div>
 
                 <div class="order-confirm-actions">
-                    <a href="#" class="btn order-confirm-whatsapp" id="whatsappOrderBtn" rel="noopener noreferrer"><i class="fab fa-whatsapp" aria-hidden="true"></i> فتح واتساب وإرسال الطلب</a>
                     <a href="https://instagram.com/hadeel.k_beauty" class="btn btn-secondary" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i> إنستغرام</a>
                     <a href="index.html" class="btn btn-secondary"><i class="fas fa-home"></i> الرئيسية</a>
                 </div>
@@ -119,7 +118,6 @@
 
     <script src="theme.js"></script>
     <script src="telegram-config.js"></script>
-    <script src="whatsapp-order.js"></script>
     <script src="telegram-notify.js"></script>
     <script src="chatbot.js"></script>
     <script>
@@ -195,31 +193,14 @@
             });
 
             document.getElementById('confirmLead').textContent =
-                'يفترض أن يكون واتساب فتح مع نص الطلب جاهز. اضغطي «إرسال» في واتساب حتى يصل الطلب لهديل. إن ما انفتح، استخدمي الزر الأخضر أدناه.';
+                'تم إرسال الطلب مباشرة إلى هديل على تلجرام. سنتواصل معكِ لتأكيد التفاصيل والتوصيل.';
 
             if (data.type === 'bit') {
                 document.getElementById('confirmTypeLabel').textContent = 'تم تأكيد الدفع';
                 document.getElementById('confirmTitle').textContent = 'شكراً! طلبك قيد المعالجة';
             }
 
-            var hintEl = document.getElementById('confirmHint');
-            var waBtn = document.getElementById('whatsappOrderBtn');
-            var d = (window.HADEEL_WHATSAPP_ORDER && String(window.HADEEL_WHATSAPP_ORDER.phone).replace(/\D/g, '')) || '';
-            var bodyText = String(data.mailBody || '').slice(0, 3800);
-            if (d && bodyText) {
-                waBtn.href = 'https://wa.me/' + d + '?text=' + encodeURIComponent(bodyText);
-                waBtn.removeAttribute('target');
-                hintEl.textContent = 'بعد ما تضغطي إرسال في واتساب، سنتواصل معكِ لتأكيد التوصيل.';
-            } else {
-                waBtn.href = '#';
-                waBtn.removeAttribute('target');
-                waBtn.classList.add('order-confirm-whatsapp--disabled');
-                waBtn.setAttribute('aria-disabled', 'true');
-                hintEl.textContent = 'رقم واتساب المتجر غير مضبوط في الملف telegram-config.js (HADEEL_WHATSAPP_ORDER.phone). راسلينا على إنستغرام لإكمال الطلب.';
-                waBtn.addEventListener('click', function (e) {
-                    e.preventDefault();
-                });
-            }
+            document.getElementById('confirmHint').textContent = 'وصل الطلب على تلجرام مباشرة.';
         })();
     </script>
 </body>

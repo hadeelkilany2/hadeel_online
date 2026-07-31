@@ -290,12 +290,23 @@
             const bgUrl = product.image.replace(/'/g, '%27');
             card.style.setProperty('--product-bg', 'url("' + bgUrl + '")');
             card.innerHTML =
+                '<div class="product-card__mobile-media">' +
+                '<span class="product-card__image-badge">' + escapeHtml(getCategoryName(product.category)) + '</span>' +
+                '<img src="' + escapeHtml(product.image) + '" alt="' + escapeHtml(product.name) + '" loading="lazy">' +
+                '</div>' +
                 '<span class="product-card__tap-hint"><i class="fas fa-circle-info" aria-hidden="true"></i> اضغطي للتفاصيل</span>' +
                 '<div class="product-content product-content--on-image">' +
-                '<div class="product-category">' + escapeHtml(getCategoryName(product.category)) + '</div>' +
+                '<div class="product-card__head">' +
                 '<h3 class="product-name">' + escapeHtml(product.name) + '</h3>' +
+                '<div class="product-category">' + escapeHtml(getCategoryName(product.category)) + '</div>' +
+                '</div>' +
                 '<p class="product-description">' + escapeHtml(product.description) + '</p>' +
+                '<p class="product-benefit"><i class="fas fa-leaf" aria-hidden="true"></i> مناسب لجميع أنواع البشرة</p>' +
+                '<button type="button" class="product-details-link" data-details="' + product.id + '">عرض التفاصيل الكاملة</button>' +
+                '<div class="product-meta-row">' +
+                '<span class="product-stock"><i class="fas fa-check-circle" aria-hidden="true"></i> متوفر</span>' +
                 '<div class="product-price">' + product.price + '</div>' +
+                '</div>' +
                 '<div class="product-actions">' +
                 '<div class="quantity-controls">' +
                 '<button type="button" class="qty-btn" data-qty-minus="' + product.id + '">-</button>' +
@@ -326,6 +337,10 @@
             card.querySelector('[data-buy="' + product.id + '"]').addEventListener('click', function(e) {
                 e.stopPropagation();
                 buyNowFromCard(this);
+            });
+            card.querySelector('[data-details="' + product.id + '"]').addEventListener('click', function(e) {
+                e.stopPropagation();
+                openProductModal(product);
             });
             return card;
         }
